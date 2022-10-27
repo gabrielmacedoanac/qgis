@@ -3,41 +3,24 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- Mobile meta tags to go in head-->
         <meta name="HandheldFriendly" content="True">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="MobileOptimized" content="320"/>
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta http-equiv="cleartype" content="on">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/MarkerCluster.css">
-        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
-        <meta name="DC.title" content="NYUAD WIDH map" />
-        <title>World's Fairs Map</title>
-        <meta name="DC.creator" content="Hixson,Taylor" />
-        <meta name="email:creator" content="taylorhixson@gmail.com" />
-        <meta name="DC.description" content="A map of the World's Fairs locations throughout time." />
-        <meta property="description" content="A map of the World's Fairs locations throughout time." />
-        <meta name="DC.type" content="Text">
-        <meta property="og:type" content="website" />
-        <meta name="DC.created" content="2019-11-13">
-        <meta name="DC.date" content="2019-11-13">
-        <meta property="og:locale" content="en_US" />
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
             height: 100%;
             padding: 0;
             margin: 0;
-            overflow-y: scroll;
-        }.leaflet-popup-content {
-        min-width: 200px;
-        min-height: 100px;
-        overflow-y: scroll;
         }
         </style>
         <title></title>
@@ -54,9 +37,16 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet.wms.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/leaflet.markercluster.js"></script>
-        <script src="data/wf_1.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/IBGETerraindigena_45.js"></script>
+        <script src="data/Minriodeferroorigemdestino_50.js"></script>
+        <script src="data/Terminaisferrovirios_51.js"></script>
+        <script src="data/TrechoferrovirioADM_52.js"></script>
+        <script src="data/Territrioindgena_53.js"></script>
+        <script src="data/Unidadedeconservao_54.js"></script>
+        <script src="data/ANMMinriodeferro_55.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -74,20 +64,2287 @@
             }
         }
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[40.887872097261635,-10.281607923238658],[61.233299379601284,29.869396717750913]]);
+            zoomControl:true, maxZoom:27, minZoom:1
+        }).fitBounds([[-25.162987067878966,-50.462709223234455],[-13.441051794056023,-37.87908542484659]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        function pop_ComunicadodeAcidenteAmbientalPblico_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_ComunicadodeAcidenteAmbientalPblico_0_0() {
+            return {
+                pane: 'pane_ComunicadodeAcidenteAmbientalPblico_0',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ComunicadodeAcidenteAmbientalPblico_0');
+        map.getPane('pane_ComunicadodeAcidenteAmbientalPblico_0').style.zIndex = 400;
+        map.getPane('pane_ComunicadodeAcidenteAmbientalPblico_0').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_ComunicadodeAcidenteAmbientalPblico_0_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_ComunicadodeAcidenteAmbientalPblico_0_0(feature));
+        }
+        var layer_ComunicadodeAcidenteAmbientalPblico_0 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ComunicadodeAcidenteAmbientalPblico_0',
+            layerName: 'layer_ComunicadodeAcidenteAmbientalPblico_0',
+            pane: 'pane_ComunicadodeAcidenteAmbientalPblico_0',
+            pointToLayer: pointToLayer_ComunicadodeAcidenteAmbientalPblico_0_0,
+            onEachFeature: pop_ComunicadodeAcidenteAmbientalPblico_0
+        });
+        function getComunicadodeAcidenteAmbientalPblico_0Json(geojson) {
+            layer_ComunicadodeAcidenteAmbientalPblico_0.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_ComunicadodeAcidenteAmbientalPblico_0);
+        map.addLayer(layer_ComunicadodeAcidenteAmbientalPblico_0);
+        function pop_PrioridadeconservaoCaatinga_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_PrioridadeconservaoCaatinga_1_0() {
+            return {
+                pane: 'pane_PrioridadeconservaoCaatinga_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,207,80,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PrioridadeconservaoCaatinga_1');
+        map.getPane('pane_PrioridadeconservaoCaatinga_1').style.zIndex = 401;
+        map.getPane('pane_PrioridadeconservaoCaatinga_1').style['mix-blend-mode'] = 'normal';
+        var layer_PrioridadeconservaoCaatinga_1 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PrioridadeconservaoCaatinga_1',
+            layerName: 'layer_PrioridadeconservaoCaatinga_1',
+            style: style_PrioridadeconservaoCaatinga_1_0,
+            pane: 'pane_PrioridadeconservaoCaatinga_1',
+            onEachFeature: pop_PrioridadeconservaoCaatinga_1
+        });
+        function getPrioridadeconservaoCaatinga_1Json(geojson) {
+            layer_PrioridadeconservaoCaatinga_1.addData(geojson);
+        };
+        bounds_group.addLayer(layer_PrioridadeconservaoCaatinga_1);
+        map.addLayer(layer_PrioridadeconservaoCaatinga_1);
+        function pop_PrioridadeconservaoMataAtlntica_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_PrioridadeconservaoMataAtlntica_2_0() {
+            return {
+                pane: 'pane_PrioridadeconservaoMataAtlntica_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PrioridadeconservaoMataAtlntica_2');
+        map.getPane('pane_PrioridadeconservaoMataAtlntica_2').style.zIndex = 402;
+        map.getPane('pane_PrioridadeconservaoMataAtlntica_2').style['mix-blend-mode'] = 'normal';
+        var layer_PrioridadeconservaoMataAtlntica_2 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PrioridadeconservaoMataAtlntica_2',
+            layerName: 'layer_PrioridadeconservaoMataAtlntica_2',
+            style: style_PrioridadeconservaoMataAtlntica_2_0,
+            pane: 'pane_PrioridadeconservaoMataAtlntica_2',
+            onEachFeature: pop_PrioridadeconservaoMataAtlntica_2
+        });
+        function getPrioridadeconservaoMataAtlntica_2Json(geojson) {
+            layer_PrioridadeconservaoMataAtlntica_2.addData(geojson);
+        };
+        bounds_group.addLayer(layer_PrioridadeconservaoMataAtlntica_2);
+        map.addLayer(layer_PrioridadeconservaoMataAtlntica_2);
+        function pop_PrioridadedeconservaoAmaznia_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_PrioridadedeconservaoAmaznia_3_0() {
+            return {
+                pane: 'pane_PrioridadedeconservaoAmaznia_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PrioridadedeconservaoAmaznia_3');
+        map.getPane('pane_PrioridadedeconservaoAmaznia_3').style.zIndex = 403;
+        map.getPane('pane_PrioridadedeconservaoAmaznia_3').style['mix-blend-mode'] = 'normal';
+        var layer_PrioridadedeconservaoAmaznia_3 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PrioridadedeconservaoAmaznia_3',
+            layerName: 'layer_PrioridadedeconservaoAmaznia_3',
+            style: style_PrioridadedeconservaoAmaznia_3_0,
+            pane: 'pane_PrioridadedeconservaoAmaznia_3',
+            onEachFeature: pop_PrioridadedeconservaoAmaznia_3
+        });
+        function getPrioridadedeconservaoAmaznia_3Json(geojson) {
+            layer_PrioridadedeconservaoAmaznia_3.addData(geojson);
+        };
+        bounds_group.addLayer(layer_PrioridadedeconservaoAmaznia_3);
+        map.addLayer(layer_PrioridadedeconservaoAmaznia_3);
+        function pop_Prioridadeparaconservaodecreto5092_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Prioridadeparaconservaodecreto5092_4_0() {
+            return {
+                pane: 'pane_Prioridadeparaconservaodecreto5092_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Prioridadeparaconservaodecreto5092_4');
+        map.getPane('pane_Prioridadeparaconservaodecreto5092_4').style.zIndex = 404;
+        map.getPane('pane_Prioridadeparaconservaodecreto5092_4').style['mix-blend-mode'] = 'normal';
+        var layer_Prioridadeparaconservaodecreto5092_4 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Prioridadeparaconservaodecreto5092_4',
+            layerName: 'layer_Prioridadeparaconservaodecreto5092_4',
+            style: style_Prioridadeparaconservaodecreto5092_4_0,
+            pane: 'pane_Prioridadeparaconservaodecreto5092_4',
+            onEachFeature: pop_Prioridadeparaconservaodecreto5092_4
+        });
+        function getPrioridadeparaconservaodecreto5092_4Json(geojson) {
+            layer_Prioridadeparaconservaodecreto5092_4.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Prioridadeparaconservaodecreto5092_4);
+        map.addLayer(layer_Prioridadeparaconservaodecreto5092_4);
+        map.createPane('pane_IBAMA_conservacao_5');
+        map.getPane('pane_IBAMA_conservacao_5').style.zIndex = 405;
+        var layer_IBAMA_conservacao_5 = L.WMS.layer("http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0", "publica:adm_prioridade_conservacao_amazonia_a", {
+            pane: 'pane_IBAMA_conservacao_5',
+            format: 'image/png',
+            uppercase: true,
+            transparent: true,
+            continuousWorld : true,
+            tiled: true,
+            info_format: 'text/html',
+            opacity: 0,
+            identify: false,
+            attribution: '',
+        });
+        map.addLayer(layer_IBAMA_conservacao_5);
+        function pop_IndstriaExtrativa2020_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_IndstriaExtrativa2020_6_0() {
+            return {
+                pane: 'pane_IndstriaExtrativa2020_6',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,140,190,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_IndstriaExtrativa2020_6');
+        map.getPane('pane_IndstriaExtrativa2020_6').style.zIndex = 406;
+        map.getPane('pane_IndstriaExtrativa2020_6').style['mix-blend-mode'] = 'normal';
+        var layer_IndstriaExtrativa2020_6 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_IndstriaExtrativa2020_6',
+            layerName: 'layer_IndstriaExtrativa2020_6',
+            style: style_IndstriaExtrativa2020_6_0,
+            pane: 'pane_IndstriaExtrativa2020_6',
+            onEachFeature: pop_IndstriaExtrativa2020_6
+        });
+        function getIndstriaExtrativa2020_6Json(geojson) {
+            layer_IndstriaExtrativa2020_6.addData(geojson);
+        };
+        bounds_group.addLayer(layer_IndstriaExtrativa2020_6);
+        map.addLayer(layer_IndstriaExtrativa2020_6);
+        map.createPane('pane_IndstriaExtrativa2020_7');
+        map.getPane('pane_IndstriaExtrativa2020_7').style.zIndex = 407;
+        var layer_IndstriaExtrativa2020_7 = L.WMS.layer("https://geoservicos.inde.gov.br/geoserver/BNDES/ows?version=1.3.0", "industriaextrativa", {
+            pane: 'pane_IndstriaExtrativa2020_7',
+            format: 'image/png',
+            uppercase: true,
+            transparent: true,
+            continuousWorld : true,
+            tiled: true,
+            info_format: 'text/html',
+            opacity: 1,
+            identify: false,
+            attribution: '',
+        });
+        map.addLayer(layer_IndstriaExtrativa2020_7);
+        function pop_Soja2020_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Soja2020_8_0(feature) {
+            if (feature.properties[' format_number(  "tu" ,0)'] >= 2.000000 && feature.properties[' format_number(  "tu" ,0)'] <= 129.522000 ) {
+                return {
+                pane: 'pane_Soja2020_8',
+                opacity: 1,
+                color: 'rgba(192,102,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number(  "tu" ,0)'] >= 129.522000 && feature.properties[' format_number(  "tu" ,0)'] <= 493.740000 ) {
+                return {
+                pane: 'pane_Soja2020_8',
+                opacity: 1,
+                color: 'rgba(192,102,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 13.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number(  "tu" ,0)'] >= 493.740000 && feature.properties[' format_number(  "tu" ,0)'] <= 958.514000 ) {
+                return {
+                pane: 'pane_Soja2020_8',
+                opacity: 1,
+                color: 'rgba(192,102,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 23.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Soja2020_8');
+        map.getPane('pane_Soja2020_8').style.zIndex = 408;
+        map.getPane('pane_Soja2020_8').style['mix-blend-mode'] = 'normal';
+        var layer_Soja2020_8 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Soja2020_8',
+            layerName: 'layer_Soja2020_8',
+            style: style_Soja2020_8_0,
+            pane: 'pane_Soja2020_8',
+            onEachFeature: pop_Soja2020_8
+        });
+        function getSoja2020_8Json(geojson) {
+            layer_Soja2020_8.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Soja2020_8);
+        map.addLayer(layer_Soja2020_8);
+        function pop_Milho2020_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Milho2020_9_0(feature) {
+            if (feature.properties['format_number("tu",0)'] >= 1.205000 && feature.properties['format_number("tu",0)'] <= 223.000000 ) {
+                return {
+                pane: 'pane_Milho2020_9',
+                opacity: 1,
+                color: 'rgba(246,189,17,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 223.000000 && feature.properties['format_number("tu",0)'] <= 564.552000 ) {
+                return {
+                pane: 'pane_Milho2020_9',
+                opacity: 1,
+                color: 'rgba(246,189,17,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 13.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 564.552000 && feature.properties['format_number("tu",0)'] <= 983.000000 ) {
+                return {
+                pane: 'pane_Milho2020_9',
+                opacity: 1,
+                color: 'rgba(246,189,17,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 23.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Milho2020_9');
+        map.getPane('pane_Milho2020_9').style.zIndex = 409;
+        map.getPane('pane_Milho2020_9').style['mix-blend-mode'] = 'normal';
+        var layer_Milho2020_9 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Milho2020_9',
+            layerName: 'layer_Milho2020_9',
+            style: style_Milho2020_9_0,
+            pane: 'pane_Milho2020_9',
+            onEachFeature: pop_Milho2020_9
+        });
+        function getMilho2020_9Json(geojson) {
+            layer_Milho2020_9.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Milho2020_9);
+        map.addLayer(layer_Milho2020_9);
+        function pop_Minriodeferrotu_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Minriodeferrotu_10_0(feature) {
+            if (feature.properties[' format_number( "tu" ,0)'] >= 1.814000 && feature.properties[' format_number( "tu" ,0)'] <= 103.543000 ) {
+                return {
+                pane: 'pane_Minriodeferrotu_10',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 103.543000 && feature.properties[' format_number( "tu" ,0)'] <= 281.812000 ) {
+                return {
+                pane: 'pane_Minriodeferrotu_10',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 281.812000 && feature.properties[' format_number( "tu" ,0)'] <= 509.965000 ) {
+                return {
+                pane: 'pane_Minriodeferrotu_10',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 509.965000 && feature.properties[' format_number( "tu" ,0)'] <= 728.368000 ) {
+                return {
+                pane: 'pane_Minriodeferrotu_10',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 728.368000 && feature.properties[' format_number( "tu" ,0)'] <= 955.357000 ) {
+                return {
+                pane: 'pane_Minriodeferrotu_10',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Minriodeferrotu_10');
+        map.getPane('pane_Minriodeferrotu_10').style.zIndex = 410;
+        map.getPane('pane_Minriodeferrotu_10').style['mix-blend-mode'] = 'normal';
+        var layer_Minriodeferrotu_10 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Minriodeferrotu_10',
+            layerName: 'layer_Minriodeferrotu_10',
+            style: style_Minriodeferrotu_10_0,
+            pane: 'pane_Minriodeferrotu_10',
+            onEachFeature: pop_Minriodeferrotu_10
+        });
+        function getMinriodeferrotu_10Json(geojson) {
+            layer_Minriodeferrotu_10.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Minriodeferrotu_10);
+        map.addLayer(layer_Minriodeferrotu_10);
+        function pop_Minriodeferro2020tu_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Minriodeferro2020tu_11_0(feature) {
+            if (feature.properties[' format_number( "tu" ,0)'] >= 1.814000 && feature.properties[' format_number( "tu" ,0)'] <= 210.238000 ) {
+                return {
+                pane: 'pane_Minriodeferro2020tu_11',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 210.238000 && feature.properties[' format_number( "tu" ,0)'] <= 509.965000 ) {
+                return {
+                pane: 'pane_Minriodeferro2020tu_11',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 13.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties[' format_number( "tu" ,0)'] >= 509.965000 && feature.properties[' format_number( "tu" ,0)'] <= 955.357000 ) {
+                return {
+                pane: 'pane_Minriodeferro2020tu_11',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 23.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Minriodeferro2020tu_11');
+        map.getPane('pane_Minriodeferro2020tu_11').style.zIndex = 411;
+        map.getPane('pane_Minriodeferro2020tu_11').style['mix-blend-mode'] = 'normal';
+        var layer_Minriodeferro2020tu_11 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Minriodeferro2020tu_11',
+            layerName: 'layer_Minriodeferro2020tu_11',
+            style: style_Minriodeferro2020tu_11_0,
+            pane: 'pane_Minriodeferro2020tu_11',
+            onEachFeature: pop_Minriodeferro2020tu_11
+        });
+        function getMinriodeferro2020tu_11Json(geojson) {
+            layer_Minriodeferro2020tu_11.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Minriodeferro2020tu_11);
+        map.addLayer(layer_Minriodeferro2020tu_11);
+        function pop_Origemdestinocargaferroviria2020_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Origemdestinocargaferroviria2020_12_0(feature) {
+            switch(String(feature.properties['mercado'])) {
+                case '[\'Açúcar\', \'Adubo Orgânico a Granel\', \'Álcool\', \'Antracito\', \'Areia\', \'Bauxita\', \'Cal\', \'Calcário Corretivo\', \'Calcário Siderúrgico\', \'Carvão Mineral\', \'Celulose\', \'Cimento a Granel\', \'Cimento acondicionado\', \'Clínquer\', \'Cloreto de Potássio\', \'Cobre\', \'Contêiner cheio 53 pés\', \'Contêiner Cheio de 20 Pés\', \'Contêiner Cheio de 40 Pés\', \'Contêiner Vazio de 20 Pés\', \'Contêiner Vazio de 40 Pés\', \'Coque\', \'Cromita\', \'Demais Produtos\', \'Dormente de Concreto\', \'Dormentes de Madeira\', \'Enxofre\', \'Escória\', \'Farelo de Milho\', \'Farelo de Soja\', \'Farinha de Trigo\', \'Ferro Gusa\', \'Fosfato\', \'Gasolina\', \'Gesso\', \'Grãos - Milho\', \'Grãos - Trigo\', \'LAB - Sulfonato de alquilbenzeno linear\', \'Magnesita\', \'Manganês\', \'Máquinas, Motores, Peças e acessórios\', \'Óleo Diesel\', \'Outras - Carga Geral Não Conteinerizada\', \'Outros - Indústria Cimenteira e Construção\', \'Outros Graneis Minerais\', \'Pedras em Blocos e Placas\', \'Pó de Pedra\', \'Prd. Siderúrgicos - Bobina - BF\', \'Prd. Siderúrgicos - Bobina - BQ\', \'Prd. Siderúrgicos - Fio Máquina\', \'Prd. Siderúrgicos - Outros\', \'Prd. Siderúrgicos - Placa\', \'Prd. Siderúrgicos - Tarugo\', \'Prd. Siderúrgicos - Tubos\', \'Prd. Siderúrgicos - Vergalhões\', \'Soja\', \'Sucata\', \'Toras de Madeira\', \'Ureia\', \'Veículos\']':
+                    return {
+                pane: 'pane_Origemdestinocargaferroviria2020_12',
+                opacity: 1,
+                color: 'rgba(235,64,149,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Minério de Ferro':
+                    return {
+                pane: 'pane_Origemdestinocargaferroviria2020_12',
+                opacity: 1,
+                color: 'rgba(73,221,181,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Minério de Ferro Especial - MRS distancia menor 100 km':
+                    return {
+                pane: 'pane_Origemdestinocargaferroviria2020_12',
+                opacity: 1,
+                color: 'rgba(215,111,115,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Origemdestinocargaferroviria2020_12',
+                opacity: 1,
+                color: 'rgba(221,131,167,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Origemdestinocargaferroviria2020_12');
+        map.getPane('pane_Origemdestinocargaferroviria2020_12').style.zIndex = 412;
+        map.getPane('pane_Origemdestinocargaferroviria2020_12').style['mix-blend-mode'] = 'normal';
+        var layer_Origemdestinocargaferroviria2020_12 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Origemdestinocargaferroviria2020_12',
+            layerName: 'layer_Origemdestinocargaferroviria2020_12',
+            style: style_Origemdestinocargaferroviria2020_12_0,
+            pane: 'pane_Origemdestinocargaferroviria2020_12',
+            onEachFeature: pop_Origemdestinocargaferroviria2020_12
+        });
+        function getOrigemdestinocargaferroviria2020_12Json(geojson) {
+            layer_Origemdestinocargaferroviria2020_12.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Origemdestinocargaferroviria2020_12);
+        map.addLayer(layer_Origemdestinocargaferroviria2020_12);
+        function pop_RedeFerroviria1910_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_RedeFerroviria1910_13_0() {
+            return {
+                pane: 'pane_RedeFerroviria1910_13',
+                opacity: 1,
+                color: 'rgba(255,158,23,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RedeFerroviria1910_13');
+        map.getPane('pane_RedeFerroviria1910_13').style.zIndex = 413;
+        map.getPane('pane_RedeFerroviria1910_13').style['mix-blend-mode'] = 'normal';
+        var layer_RedeFerroviria1910_13 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedeFerroviria1910_13',
+            layerName: 'layer_RedeFerroviria1910_13',
+            style: style_RedeFerroviria1910_13_0,
+            pane: 'pane_RedeFerroviria1910_13',
+            onEachFeature: pop_RedeFerroviria1910_13
+        });
+        function getRedeFerroviria1910_13Json(geojson) {
+            layer_RedeFerroviria1910_13.addData(geojson);
+        };
+        bounds_group.addLayer(layer_RedeFerroviria1910_13);
+        map.addLayer(layer_RedeFerroviria1910_13);
+        function pop_RedeFerroviria1964_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_RedeFerroviria1964_14_0() {
+            return {
+                pane: 'pane_RedeFerroviria1964_14',
+                opacity: 1,
+                color: 'rgba(183,72,75,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RedeFerroviria1964_14');
+        map.getPane('pane_RedeFerroviria1964_14').style.zIndex = 414;
+        map.getPane('pane_RedeFerroviria1964_14').style['mix-blend-mode'] = 'normal';
+        var layer_RedeFerroviria1964_14 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedeFerroviria1964_14',
+            layerName: 'layer_RedeFerroviria1964_14',
+            style: style_RedeFerroviria1964_14_0,
+            pane: 'pane_RedeFerroviria1964_14',
+            onEachFeature: pop_RedeFerroviria1964_14
+        });
+        function getRedeFerroviria1964_14Json(geojson) {
+            layer_RedeFerroviria1964_14.addData(geojson);
+        };
+        bounds_group.addLayer(layer_RedeFerroviria1964_14);
+        map.addLayer(layer_RedeFerroviria1964_14);
+        function pop_RedeFerroviria1985_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_RedeFerroviria1985_15_0() {
+            return {
+                pane: 'pane_RedeFerroviria1985_15',
+                opacity: 1,
+                color: 'rgba(231,113,72,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RedeFerroviria1985_15');
+        map.getPane('pane_RedeFerroviria1985_15').style.zIndex = 415;
+        map.getPane('pane_RedeFerroviria1985_15').style['mix-blend-mode'] = 'normal';
+        var layer_RedeFerroviria1985_15 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedeFerroviria1985_15',
+            layerName: 'layer_RedeFerroviria1985_15',
+            style: style_RedeFerroviria1985_15_0,
+            pane: 'pane_RedeFerroviria1985_15',
+            onEachFeature: pop_RedeFerroviria1985_15
+        });
+        function getRedeFerroviria1985_15Json(geojson) {
+            layer_RedeFerroviria1985_15.addData(geojson);
+        };
+        bounds_group.addLayer(layer_RedeFerroviria1985_15);
+        map.addLayer(layer_RedeFerroviria1985_15);
+        function pop_RedeFerroviria1999_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_RedeFerroviria1999_16_0() {
+            return {
+                pane: 'pane_RedeFerroviria1999_16',
+                opacity: 1,
+                color: 'rgba(152,125,183,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RedeFerroviria1999_16');
+        map.getPane('pane_RedeFerroviria1999_16').style.zIndex = 416;
+        map.getPane('pane_RedeFerroviria1999_16').style['mix-blend-mode'] = 'normal';
+        var layer_RedeFerroviria1999_16 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedeFerroviria1999_16',
+            layerName: 'layer_RedeFerroviria1999_16',
+            style: style_RedeFerroviria1999_16_0,
+            pane: 'pane_RedeFerroviria1999_16',
+            onEachFeature: pop_RedeFerroviria1999_16
+        });
+        function getRedeFerroviria1999_16Json(geojson) {
+            layer_RedeFerroviria1999_16.addData(geojson);
+        };
+        bounds_group.addLayer(layer_RedeFerroviria1999_16);
+        map.addLayer(layer_RedeFerroviria1999_16);
+        function pop_RedeFerroviria2007_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_RedeFerroviria2007_17_0() {
+            return {
+                pane: 'pane_RedeFerroviria2007_17',
+                opacity: 1,
+                color: 'rgba(190,207,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RedeFerroviria2007_17');
+        map.getPane('pane_RedeFerroviria2007_17').style.zIndex = 417;
+        map.getPane('pane_RedeFerroviria2007_17').style['mix-blend-mode'] = 'normal';
+        var layer_RedeFerroviria2007_17 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RedeFerroviria2007_17',
+            layerName: 'layer_RedeFerroviria2007_17',
+            style: style_RedeFerroviria2007_17_0,
+            pane: 'pane_RedeFerroviria2007_17',
+            onEachFeature: pop_RedeFerroviria2007_17
+        });
+        function getRedeFerroviria2007_17Json(geojson) {
+            layer_RedeFerroviria2007_17.addData(geojson);
+        };
+        bounds_group.addLayer(layer_RedeFerroviria2007_17);
+        map.addLayer(layer_RedeFerroviria2007_17);
+        function pop_Terminaisferroviriosmilho2020_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Terminaisferroviriosmilho2020_18_0() {
+            return {
+                pane: 'pane_Terminaisferroviriosmilho2020_18',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Terminaisferroviriosmilho2020_18');
+        map.getPane('pane_Terminaisferroviriosmilho2020_18').style.zIndex = 418;
+        map.getPane('pane_Terminaisferroviriosmilho2020_18').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_Terminaisferroviriosmilho2020_18_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_Terminaisferroviriosmilho2020_18_0(feature));
+        }
+        var layer_Terminaisferroviriosmilho2020_18 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Terminaisferroviriosmilho2020_18',
+            layerName: 'layer_Terminaisferroviriosmilho2020_18',
+            pane: 'pane_Terminaisferroviriosmilho2020_18',
+            pointToLayer: pointToLayer_Terminaisferroviriosmilho2020_18_0,
+            onEachFeature: pop_Terminaisferroviriosmilho2020_18
+        });
+        function getTerminaisferroviriosmilho2020_18Json(geojson) {
+            layer_Terminaisferroviriosmilho2020_18.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_Terminaisferroviriosmilho2020_18);
+        map.addLayer(layer_Terminaisferroviriosmilho2020_18);
+        function pop_Terminaisferroviriossoja2020_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Terminaisferroviriossoja2020_19_0() {
+            return {
+                pane: 'pane_Terminaisferroviriossoja2020_19',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,178,151,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Terminaisferroviriossoja2020_19');
+        map.getPane('pane_Terminaisferroviriossoja2020_19').style.zIndex = 419;
+        map.getPane('pane_Terminaisferroviriossoja2020_19').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_Terminaisferroviriossoja2020_19_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_Terminaisferroviriossoja2020_19_0(feature));
+        }
+        var layer_Terminaisferroviriossoja2020_19 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Terminaisferroviriossoja2020_19',
+            layerName: 'layer_Terminaisferroviriossoja2020_19',
+            pane: 'pane_Terminaisferroviriossoja2020_19',
+            pointToLayer: pointToLayer_Terminaisferroviriossoja2020_19_0,
+            onEachFeature: pop_Terminaisferroviriossoja2020_19
+        });
+        function getTerminaisferroviriossoja2020_19Json(geojson) {
+            layer_Terminaisferroviriossoja2020_19.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_Terminaisferroviriossoja2020_19);
+        map.addLayer(layer_Terminaisferroviriossoja2020_19);
+        function pop_TrechoFerrovirio_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_TrechoFerrovirio_20_0() {
+            return {
+                pane: 'pane_TrechoFerrovirio_20',
+                opacity: 1,
+                color: 'rgba(145,82,45,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TrechoFerrovirio_20');
+        map.getPane('pane_TrechoFerrovirio_20').style.zIndex = 420;
+        map.getPane('pane_TrechoFerrovirio_20').style['mix-blend-mode'] = 'normal';
+        var layer_TrechoFerrovirio_20 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TrechoFerrovirio_20',
+            layerName: 'layer_TrechoFerrovirio_20',
+            style: style_TrechoFerrovirio_20_0,
+            pane: 'pane_TrechoFerrovirio_20',
+            onEachFeature: pop_TrechoFerrovirio_20
+        });
+        function getTrechoFerrovirio_20Json(geojson) {
+            layer_TrechoFerrovirio_20.addData(geojson);
+        };
+        bounds_group.addLayer(layer_TrechoFerrovirio_20);
+        map.addLayer(layer_TrechoFerrovirio_20);
+        function pop_BC100TrechoFerroviarioL_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC100TrechoFerroviarioL_21_0() {
+            return {
+                pane: 'pane_BC100TrechoFerroviarioL_21',
+                opacity: 1,
+                color: 'rgba(190,178,151,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC100TrechoFerroviarioL_21');
+        map.getPane('pane_BC100TrechoFerroviarioL_21').style.zIndex = 421;
+        map.getPane('pane_BC100TrechoFerroviarioL_21').style['mix-blend-mode'] = 'normal';
+        var layer_BC100TrechoFerroviarioL_21 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC100TrechoFerroviarioL_21',
+            layerName: 'layer_BC100TrechoFerroviarioL_21',
+            style: style_BC100TrechoFerroviarioL_21_0,
+            pane: 'pane_BC100TrechoFerroviarioL_21',
+            onEachFeature: pop_BC100TrechoFerroviarioL_21
+        });
+        function getBC100TrechoFerroviarioL_21Json(geojson) {
+            layer_BC100TrechoFerroviarioL_21.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC100TrechoFerroviarioL_21);
+        map.addLayer(layer_BC100TrechoFerroviarioL_21);
+        function pop_BC100_ESTrechoFerroviarioLinha_22(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC100_ESTrechoFerroviarioLinha_22_0() {
+            return {
+                pane: 'pane_BC100_ESTrechoFerroviarioLinha_22',
+                opacity: 1,
+                color: 'rgba(145,82,45,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC100_ESTrechoFerroviarioLinha_22');
+        map.getPane('pane_BC100_ESTrechoFerroviarioLinha_22').style.zIndex = 422;
+        map.getPane('pane_BC100_ESTrechoFerroviarioLinha_22').style['mix-blend-mode'] = 'normal';
+        var layer_BC100_ESTrechoFerroviarioLinha_22 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC100_ESTrechoFerroviarioLinha_22',
+            layerName: 'layer_BC100_ESTrechoFerroviarioLinha_22',
+            style: style_BC100_ESTrechoFerroviarioLinha_22_0,
+            pane: 'pane_BC100_ESTrechoFerroviarioLinha_22',
+            onEachFeature: pop_BC100_ESTrechoFerroviarioLinha_22
+        });
+        function getBC100_ESTrechoFerroviarioLinha_22Json(geojson) {
+            layer_BC100_ESTrechoFerroviarioLinha_22.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC100_ESTrechoFerroviarioLinha_22);
+        map.addLayer(layer_BC100_ESTrechoFerroviarioLinha_22);
+        function pop_BC100_RS_2021TrechoFerroviarioLinha_23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC100_RS_2021TrechoFerroviarioLinha_23_0() {
+            return {
+                pane: 'pane_BC100_RS_2021TrechoFerroviarioLinha_23',
+                opacity: 1,
+                color: 'rgba(125,139,143,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC100_RS_2021TrechoFerroviarioLinha_23');
+        map.getPane('pane_BC100_RS_2021TrechoFerroviarioLinha_23').style.zIndex = 423;
+        map.getPane('pane_BC100_RS_2021TrechoFerroviarioLinha_23').style['mix-blend-mode'] = 'normal';
+        var layer_BC100_RS_2021TrechoFerroviarioLinha_23 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC100_RS_2021TrechoFerroviarioLinha_23',
+            layerName: 'layer_BC100_RS_2021TrechoFerroviarioLinha_23',
+            style: style_BC100_RS_2021TrechoFerroviarioLinha_23_0,
+            pane: 'pane_BC100_RS_2021TrechoFerroviarioLinha_23',
+            onEachFeature: pop_BC100_RS_2021TrechoFerroviarioLinha_23
+        });
+        function getBC100_RS_2021TrechoFerroviarioLinha_23Json(geojson) {
+            layer_BC100_RS_2021TrechoFerroviarioLinha_23.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC100_RS_2021TrechoFerroviarioLinha_23);
+        map.addLayer(layer_BC100_RS_2021TrechoFerroviarioLinha_23);
+        function pop_BC100_SE_2019TrechoFerroviarioLinha_24(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC100_SE_2019TrechoFerroviarioLinha_24_0() {
+            return {
+                pane: 'pane_BC100_SE_2019TrechoFerroviarioLinha_24',
+                opacity: 1,
+                color: 'rgba(133,182,111,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC100_SE_2019TrechoFerroviarioLinha_24');
+        map.getPane('pane_BC100_SE_2019TrechoFerroviarioLinha_24').style.zIndex = 424;
+        map.getPane('pane_BC100_SE_2019TrechoFerroviarioLinha_24').style['mix-blend-mode'] = 'normal';
+        var layer_BC100_SE_2019TrechoFerroviarioLinha_24 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC100_SE_2019TrechoFerroviarioLinha_24',
+            layerName: 'layer_BC100_SE_2019TrechoFerroviarioLinha_24',
+            style: style_BC100_SE_2019TrechoFerroviarioLinha_24_0,
+            pane: 'pane_BC100_SE_2019TrechoFerroviarioLinha_24',
+            onEachFeature: pop_BC100_SE_2019TrechoFerroviarioLinha_24
+        });
+        function getBC100_SE_2019TrechoFerroviarioLinha_24Json(geojson) {
+            layer_BC100_SE_2019TrechoFerroviarioLinha_24.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC100_SE_2019TrechoFerroviarioLinha_24);
+        map.addLayer(layer_BC100_SE_2019TrechoFerroviarioLinha_24);
+        function pop_BC25PontoFerroviarioPonto_25(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC25PontoFerroviarioPonto_25_0() {
+            return {
+                pane: 'pane_BC25PontoFerroviarioPonto_25',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC25PontoFerroviarioPonto_25');
+        map.getPane('pane_BC25PontoFerroviarioPonto_25').style.zIndex = 425;
+        map.getPane('pane_BC25PontoFerroviarioPonto_25').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_BC25PontoFerroviarioPonto_25_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_BC25PontoFerroviarioPonto_25_0(feature));
+        }
+        var layer_BC25PontoFerroviarioPonto_25 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC25PontoFerroviarioPonto_25',
+            layerName: 'layer_BC25PontoFerroviarioPonto_25',
+            pane: 'pane_BC25PontoFerroviarioPonto_25',
+            pointToLayer: pointToLayer_BC25PontoFerroviarioPonto_25_0,
+            onEachFeature: pop_BC25PontoFerroviarioPonto_25
+        });
+        function getBC25PontoFerroviarioPonto_25Json(geojson) {
+            layer_BC25PontoFerroviarioPonto_25.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_BC25PontoFerroviarioPonto_25);
+        map.addLayer(layer_BC25PontoFerroviarioPonto_25);
+        function pop_BC25TrechoFerroviarioLinha_26(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC25TrechoFerroviarioLinha_26_0() {
+            return {
+                pane: 'pane_BC25TrechoFerroviarioLinha_26',
+                opacity: 1,
+                color: 'rgba(213,180,60,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC25TrechoFerroviarioLinha_26');
+        map.getPane('pane_BC25TrechoFerroviarioLinha_26').style.zIndex = 426;
+        map.getPane('pane_BC25TrechoFerroviarioLinha_26').style['mix-blend-mode'] = 'normal';
+        var layer_BC25TrechoFerroviarioLinha_26 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC25TrechoFerroviarioLinha_26',
+            layerName: 'layer_BC25TrechoFerroviarioLinha_26',
+            style: style_BC25TrechoFerroviarioLinha_26_0,
+            pane: 'pane_BC25TrechoFerroviarioLinha_26',
+            onEachFeature: pop_BC25TrechoFerroviarioLinha_26
+        });
+        function getBC25TrechoFerroviarioLinha_26Json(geojson) {
+            layer_BC25TrechoFerroviarioLinha_26.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC25TrechoFerroviarioLinha_26);
+        map.addLayer(layer_BC25TrechoFerroviarioLinha_26);
+        function pop_BC250_2017TrechoFerrovirioLinha_27(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC250_2017TrechoFerrovirioLinha_27_0() {
+            return {
+                pane: 'pane_BC250_2017TrechoFerrovirioLinha_27',
+                opacity: 1,
+                color: 'rgba(114,155,111,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC250_2017TrechoFerrovirioLinha_27');
+        map.getPane('pane_BC250_2017TrechoFerrovirioLinha_27').style.zIndex = 427;
+        map.getPane('pane_BC250_2017TrechoFerrovirioLinha_27').style['mix-blend-mode'] = 'normal';
+        var layer_BC250_2017TrechoFerrovirioLinha_27 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC250_2017TrechoFerrovirioLinha_27',
+            layerName: 'layer_BC250_2017TrechoFerrovirioLinha_27',
+            style: style_BC250_2017TrechoFerrovirioLinha_27_0,
+            pane: 'pane_BC250_2017TrechoFerrovirioLinha_27',
+            onEachFeature: pop_BC250_2017TrechoFerrovirioLinha_27
+        });
+        function getBC250_2017TrechoFerrovirioLinha_27Json(geojson) {
+            layer_BC250_2017TrechoFerrovirioLinha_27.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC250_2017TrechoFerrovirioLinha_27);
+        map.addLayer(layer_BC250_2017TrechoFerrovirioLinha_27);
+        function pop_BC250_2019TrechoFerroviarioLinha_28(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC250_2019TrechoFerroviarioLinha_28_0() {
+            return {
+                pane: 'pane_BC250_2019TrechoFerroviarioLinha_28',
+                opacity: 1,
+                color: 'rgba(243,166,178,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC250_2019TrechoFerroviarioLinha_28');
+        map.getPane('pane_BC250_2019TrechoFerroviarioLinha_28').style.zIndex = 428;
+        map.getPane('pane_BC250_2019TrechoFerroviarioLinha_28').style['mix-blend-mode'] = 'normal';
+        var layer_BC250_2019TrechoFerroviarioLinha_28 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC250_2019TrechoFerroviarioLinha_28',
+            layerName: 'layer_BC250_2019TrechoFerroviarioLinha_28',
+            style: style_BC250_2019TrechoFerroviarioLinha_28_0,
+            pane: 'pane_BC250_2019TrechoFerroviarioLinha_28',
+            onEachFeature: pop_BC250_2019TrechoFerroviarioLinha_28
+        });
+        function getBC250_2019TrechoFerroviarioLinha_28Json(geojson) {
+            layer_BC250_2019TrechoFerroviarioLinha_28.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC250_2019TrechoFerroviarioLinha_28);
+        map.addLayer(layer_BC250_2019TrechoFerroviarioLinha_28);
+        function pop_bc25_sc_2020TrechoFerroviarioLinha_29(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_bc25_sc_2020TrechoFerroviarioLinha_29_0() {
+            return {
+                pane: 'pane_bc25_sc_2020TrechoFerroviarioLinha_29',
+                opacity: 1,
+                color: 'rgba(232,113,141,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_bc25_sc_2020TrechoFerroviarioLinha_29');
+        map.getPane('pane_bc25_sc_2020TrechoFerroviarioLinha_29').style.zIndex = 429;
+        map.getPane('pane_bc25_sc_2020TrechoFerroviarioLinha_29').style['mix-blend-mode'] = 'normal';
+        var layer_bc25_sc_2020TrechoFerroviarioLinha_29 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_bc25_sc_2020TrechoFerroviarioLinha_29',
+            layerName: 'layer_bc25_sc_2020TrechoFerroviarioLinha_29',
+            style: style_bc25_sc_2020TrechoFerroviarioLinha_29_0,
+            pane: 'pane_bc25_sc_2020TrechoFerroviarioLinha_29',
+            onEachFeature: pop_bc25_sc_2020TrechoFerroviarioLinha_29
+        });
+        function getbc25_sc_2020TrechoFerroviarioLinha_29Json(geojson) {
+            layer_bc25_sc_2020TrechoFerroviarioLinha_29.addData(geojson);
+        };
+        bounds_group.addLayer(layer_bc25_sc_2020TrechoFerroviarioLinha_29);
+        map.addLayer(layer_bc25_sc_2020TrechoFerroviarioLinha_29);
+        function pop_BCIMTrecho_FerroviarioLinha_30(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BCIMTrecho_FerroviarioLinha_30_0() {
+            return {
+                pane: 'pane_BCIMTrecho_FerroviarioLinha_30',
+                opacity: 1,
+                color: 'rgba(255,158,23,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BCIMTrecho_FerroviarioLinha_30');
+        map.getPane('pane_BCIMTrecho_FerroviarioLinha_30').style.zIndex = 430;
+        map.getPane('pane_BCIMTrecho_FerroviarioLinha_30').style['mix-blend-mode'] = 'normal';
+        var layer_BCIMTrecho_FerroviarioLinha_30 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BCIMTrecho_FerroviarioLinha_30',
+            layerName: 'layer_BCIMTrecho_FerroviarioLinha_30',
+            style: style_BCIMTrecho_FerroviarioLinha_30_0,
+            pane: 'pane_BCIMTrecho_FerroviarioLinha_30',
+            onEachFeature: pop_BCIMTrecho_FerroviarioLinha_30
+        });
+        function getBCIMTrecho_FerroviarioLinha_30Json(geojson) {
+            layer_BCIMTrecho_FerroviarioLinha_30.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BCIMTrecho_FerroviarioLinha_30);
+        map.addLayer(layer_BCIMTrecho_FerroviarioLinha_30);
+        function pop_IBGEEmpresastransportedecargaferrovirio2019_31(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_IBGEEmpresastransportedecargaferrovirio2019_31_0() {
+            return {
+                pane: 'pane_IBGEEmpresastransportedecargaferrovirio2019_31',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_IBGEEmpresastransportedecargaferrovirio2019_31');
+        map.getPane('pane_IBGEEmpresastransportedecargaferrovirio2019_31').style.zIndex = 431;
+        map.getPane('pane_IBGEEmpresastransportedecargaferrovirio2019_31').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_IBGEEmpresastransportedecargaferrovirio2019_31_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_IBGEEmpresastransportedecargaferrovirio2019_31_0(feature));
+        }
+        var layer_IBGEEmpresastransportedecargaferrovirio2019_31 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_IBGEEmpresastransportedecargaferrovirio2019_31',
+            layerName: 'layer_IBGEEmpresastransportedecargaferrovirio2019_31',
+            pane: 'pane_IBGEEmpresastransportedecargaferrovirio2019_31',
+            pointToLayer: pointToLayer_IBGEEmpresastransportedecargaferrovirio2019_31_0,
+            onEachFeature: pop_IBGEEmpresastransportedecargaferrovirio2019_31
+        });
+        function getIBGEEmpresastransportedecargaferrovirio2019_31Json(geojson) {
+            layer_IBGEEmpresastransportedecargaferrovirio2019_31.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_IBGEEmpresastransportedecargaferrovirio2019_31);
+        map.addLayer(layer_IBGEEmpresastransportedecargaferrovirio2019_31);
+        function pop_Ferrovia_32(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Ferrovia_32_0() {
+            return {
+                pane: 'pane_Ferrovia_32',
+                opacity: 1,
+                color: 'rgba(152,125,183,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ferrovia_32');
+        map.getPane('pane_Ferrovia_32').style.zIndex = 432;
+        map.getPane('pane_Ferrovia_32').style['mix-blend-mode'] = 'normal';
+        var layer_Ferrovia_32 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ferrovia_32',
+            layerName: 'layer_Ferrovia_32',
+            style: style_Ferrovia_32_0,
+            pane: 'pane_Ferrovia_32',
+            onEachFeature: pop_Ferrovia_32
+        });
+        function getFerrovia_32Json(geojson) {
+            layer_Ferrovia_32.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Ferrovia_32);
+        map.addLayer(layer_Ferrovia_32);
+        function pop_Ferrovia_33(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Ferrovia_33_0() {
+            return {
+                pane: 'pane_Ferrovia_33',
+                opacity: 1,
+                color: 'rgba(190,207,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ferrovia_33');
+        map.getPane('pane_Ferrovia_33').style.zIndex = 433;
+        map.getPane('pane_Ferrovia_33').style['mix-blend-mode'] = 'normal';
+        var layer_Ferrovia_33 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ferrovia_33',
+            layerName: 'layer_Ferrovia_33',
+            style: style_Ferrovia_33_0,
+            pane: 'pane_Ferrovia_33',
+            onEachFeature: pop_Ferrovia_33
+        });
+        function getFerrovia_33Json(geojson) {
+            layer_Ferrovia_33.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Ferrovia_33);
+        map.addLayer(layer_Ferrovia_33);
+        function pop_Ferrovia_34(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Ferrovia_34_0() {
+            return {
+                pane: 'pane_Ferrovia_34',
+                opacity: 1,
+                color: 'rgba(225,89,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ferrovia_34');
+        map.getPane('pane_Ferrovia_34').style.zIndex = 434;
+        map.getPane('pane_Ferrovia_34').style['mix-blend-mode'] = 'normal';
+        var layer_Ferrovia_34 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ferrovia_34',
+            layerName: 'layer_Ferrovia_34',
+            style: style_Ferrovia_34_0,
+            pane: 'pane_Ferrovia_34',
+            onEachFeature: pop_Ferrovia_34
+        });
+        function getFerrovia_34Json(geojson) {
+            layer_Ferrovia_34.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Ferrovia_34);
+        map.addLayer(layer_Ferrovia_34);
+        function pop_Ferrovias_35(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Ferrovias_35_0() {
+            return {
+                pane: 'pane_Ferrovias_35',
+                opacity: 1,
+                color: 'rgba(229,182,54,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ferrovias_35');
+        map.getPane('pane_Ferrovias_35').style.zIndex = 435;
+        map.getPane('pane_Ferrovias_35').style['mix-blend-mode'] = 'normal';
+        var layer_Ferrovias_35 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ferrovias_35',
+            layerName: 'layer_Ferrovias_35',
+            style: style_Ferrovias_35_0,
+            pane: 'pane_Ferrovias_35',
+            onEachFeature: pop_Ferrovias_35
+        });
+        function getFerrovias_35Json(geojson) {
+            layer_Ferrovias_35.addData(geojson);
+        };
+        bounds_group.addLayer(layer_Ferrovias_35);
+        map.addLayer(layer_Ferrovias_35);
+        function pop_Terminaisferroviriosprincipalproduto2020_36(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_Terminaisferroviriosprincipalproduto2020_36_0() {
+            return {
+                pane: 'pane_Terminaisferroviriosprincipalproduto2020_36',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Terminaisferroviriosprincipalproduto2020_36');
+        map.getPane('pane_Terminaisferroviriosprincipalproduto2020_36').style.zIndex = 436;
+        map.getPane('pane_Terminaisferroviriosprincipalproduto2020_36').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_Terminaisferroviriosprincipalproduto2020_36_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_Terminaisferroviriosprincipalproduto2020_36_0(feature));
+        }
+        var layer_Terminaisferroviriosprincipalproduto2020_36 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Terminaisferroviriosprincipalproduto2020_36',
+            layerName: 'layer_Terminaisferroviriosprincipalproduto2020_36',
+            pane: 'pane_Terminaisferroviriosprincipalproduto2020_36',
+            pointToLayer: pointToLayer_Terminaisferroviriosprincipalproduto2020_36_0,
+            onEachFeature: pop_Terminaisferroviriosprincipalproduto2020_36
+        });
+        function getTerminaisferroviriosprincipalproduto2020_36Json(geojson) {
+            layer_Terminaisferroviriosprincipalproduto2020_36.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_Terminaisferroviriosprincipalproduto2020_36);
+        map.addLayer(layer_Terminaisferroviriosprincipalproduto2020_36);
+        function pop_reasespeciaisdeproteoeconservaodabiodiversidade_37(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_reasespeciaisdeproteoeconservaodabiodiversidade_37_0() {
+            return {
+                pane: 'pane_reasespeciaisdeproteoeconservaodabiodiversidade_37',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_37');
+        map.getPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_37').style.zIndex = 437;
+        map.getPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_37').style['mix-blend-mode'] = 'normal';
+        var layer_reasespeciaisdeproteoeconservaodabiodiversidade_37 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_reasespeciaisdeproteoeconservaodabiodiversidade_37',
+            layerName: 'layer_reasespeciaisdeproteoeconservaodabiodiversidade_37',
+            style: style_reasespeciaisdeproteoeconservaodabiodiversidade_37_0,
+            pane: 'pane_reasespeciaisdeproteoeconservaodabiodiversidade_37',
+            onEachFeature: pop_reasespeciaisdeproteoeconservaodabiodiversidade_37
+        });
+        function getreasespeciaisdeproteoeconservaodabiodiversidade_37Json(geojson) {
+            layer_reasespeciaisdeproteoeconservaodabiodiversidade_37.addData(geojson);
+        };
+        bounds_group.addLayer(layer_reasespeciaisdeproteoeconservaodabiodiversidade_37);
+        map.addLayer(layer_reasespeciaisdeproteoeconservaodabiodiversidade_37);
+        function pop_UnidadedeConservao_38(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_UnidadedeConservao_38_0() {
+            return {
+                pane: 'pane_UnidadedeConservao_38',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_UnidadedeConservao_38');
+        map.getPane('pane_UnidadedeConservao_38').style.zIndex = 438;
+        map.getPane('pane_UnidadedeConservao_38').style['mix-blend-mode'] = 'normal';
+        var layer_UnidadedeConservao_38 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_UnidadedeConservao_38',
+            layerName: 'layer_UnidadedeConservao_38',
+            style: style_UnidadedeConservao_38_0,
+            pane: 'pane_UnidadedeConservao_38',
+            onEachFeature: pop_UnidadedeConservao_38
+        });
+        function getUnidadedeConservao_38Json(geojson) {
+            layer_UnidadedeConservao_38.addData(geojson);
+        };
+        bounds_group.addLayer(layer_UnidadedeConservao_38);
+        map.addLayer(layer_UnidadedeConservao_38);
+        function pop_BCIMUnidade_Conservacao_Nao_Snucrea_39(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BCIMUnidade_Conservacao_Nao_Snucrea_39_0() {
+            return {
+                pane: 'pane_BCIMUnidade_Conservacao_Nao_Snucrea_39',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BCIMUnidade_Conservacao_Nao_Snucrea_39');
+        map.getPane('pane_BCIMUnidade_Conservacao_Nao_Snucrea_39').style.zIndex = 439;
+        map.getPane('pane_BCIMUnidade_Conservacao_Nao_Snucrea_39').style['mix-blend-mode'] = 'normal';
+        var layer_BCIMUnidade_Conservacao_Nao_Snucrea_39 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BCIMUnidade_Conservacao_Nao_Snucrea_39',
+            layerName: 'layer_BCIMUnidade_Conservacao_Nao_Snucrea_39',
+            style: style_BCIMUnidade_Conservacao_Nao_Snucrea_39_0,
+            pane: 'pane_BCIMUnidade_Conservacao_Nao_Snucrea_39',
+            onEachFeature: pop_BCIMUnidade_Conservacao_Nao_Snucrea_39
+        });
+        function getBCIMUnidade_Conservacao_Nao_Snucrea_39Json(geojson) {
+            layer_BCIMUnidade_Conservacao_Nao_Snucrea_39.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BCIMUnidade_Conservacao_Nao_Snucrea_39);
+        map.addLayer(layer_BCIMUnidade_Conservacao_Nao_Snucrea_39);
+        function pop_reasespeciaisdeproteoeconservaodabiodiversidade_40(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_reasespeciaisdeproteoeconservaodabiodiversidade_40_0() {
+            return {
+                pane: 'pane_reasespeciaisdeproteoeconservaodabiodiversidade_40',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(17,252,138,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_40');
+        map.getPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_40').style.zIndex = 440;
+        map.getPane('pane_reasespeciaisdeproteoeconservaodabiodiversidade_40').style['mix-blend-mode'] = 'normal';
+        var layer_reasespeciaisdeproteoeconservaodabiodiversidade_40 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_reasespeciaisdeproteoeconservaodabiodiversidade_40',
+            layerName: 'layer_reasespeciaisdeproteoeconservaodabiodiversidade_40',
+            style: style_reasespeciaisdeproteoeconservaodabiodiversidade_40_0,
+            pane: 'pane_reasespeciaisdeproteoeconservaodabiodiversidade_40',
+            onEachFeature: pop_reasespeciaisdeproteoeconservaodabiodiversidade_40
+        });
+        function getreasespeciaisdeproteoeconservaodabiodiversidade_40Json(geojson) {
+            layer_reasespeciaisdeproteoeconservaodabiodiversidade_40.addData(geojson);
+        };
+        bounds_group.addLayer(layer_reasespeciaisdeproteoeconservaodabiodiversidade_40);
+        map.addLayer(layer_reasespeciaisdeproteoeconservaodabiodiversidade_40);
+        function pop_BC250_2021ExtMineralrea_41(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC250_2021ExtMineralrea_41_0() {
+            return {
+                pane: 'pane_BC250_2021ExtMineralrea_41',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,139,143,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC250_2021ExtMineralrea_41');
+        map.getPane('pane_BC250_2021ExtMineralrea_41').style.zIndex = 441;
+        map.getPane('pane_BC250_2021ExtMineralrea_41').style['mix-blend-mode'] = 'normal';
+        var layer_BC250_2021ExtMineralrea_41 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC250_2021ExtMineralrea_41',
+            layerName: 'layer_BC250_2021ExtMineralrea_41',
+            style: style_BC250_2021ExtMineralrea_41_0,
+            pane: 'pane_BC250_2021ExtMineralrea_41',
+            onEachFeature: pop_BC250_2021ExtMineralrea_41
+        });
+        function getBC250_2021ExtMineralrea_41Json(geojson) {
+            layer_BC250_2021ExtMineralrea_41.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC250_2021ExtMineralrea_41);
+        map.addLayer(layer_BC250_2021ExtMineralrea_41);
+        function pop_BC25AldeiaIndigenaPonto_42(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC25AldeiaIndigenaPonto_42_0() {
+            return {
+                pane: 'pane_BC25AldeiaIndigenaPonto_42',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC25AldeiaIndigenaPonto_42');
+        map.getPane('pane_BC25AldeiaIndigenaPonto_42').style.zIndex = 442;
+        map.getPane('pane_BC25AldeiaIndigenaPonto_42').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_BC25AldeiaIndigenaPonto_42_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_BC25AldeiaIndigenaPonto_42_0(feature));
+        }
+        var layer_BC25AldeiaIndigenaPonto_42 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC25AldeiaIndigenaPonto_42',
+            layerName: 'layer_BC25AldeiaIndigenaPonto_42',
+            pane: 'pane_BC25AldeiaIndigenaPonto_42',
+            pointToLayer: pointToLayer_BC25AldeiaIndigenaPonto_42_0,
+            onEachFeature: pop_BC25AldeiaIndigenaPonto_42
+        });
+        function getBC25AldeiaIndigenaPonto_42Json(geojson) {
+            layer_BC25AldeiaIndigenaPonto_42.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_BC25AldeiaIndigenaPonto_42);
+        map.addLayer(layer_BC25AldeiaIndigenaPonto_42);
+        function pop_BCIMAldeia_Indigenaponto_43(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BCIMAldeia_Indigenaponto_43_0() {
+            return {
+                pane: 'pane_BCIMAldeia_Indigenaponto_43',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,60,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BCIMAldeia_Indigenaponto_43');
+        map.getPane('pane_BCIMAldeia_Indigenaponto_43').style.zIndex = 443;
+        map.getPane('pane_BCIMAldeia_Indigenaponto_43').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_BCIMAldeia_Indigenaponto_43_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_BCIMAldeia_Indigenaponto_43_0(feature));
+        }
+        var layer_BCIMAldeia_Indigenaponto_43 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BCIMAldeia_Indigenaponto_43',
+            layerName: 'layer_BCIMAldeia_Indigenaponto_43',
+            pane: 'pane_BCIMAldeia_Indigenaponto_43',
+            pointToLayer: pointToLayer_BCIMAldeia_Indigenaponto_43_0,
+            onEachFeature: pop_BCIMAldeia_Indigenaponto_43
+        });
+        function getBCIMAldeia_Indigenaponto_43Json(geojson) {
+            layer_BCIMAldeia_Indigenaponto_43.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_BCIMAldeia_Indigenaponto_43);
+        map.addLayer(layer_BCIMAldeia_Indigenaponto_43);
+        function pop_BCIMTerra_Indigenaponto_44(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BCIMTerra_Indigenaponto_44_0() {
+            return {
+                pane: 'pane_BCIMTerra_Indigenaponto_44',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,178,151,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BCIMTerra_Indigenaponto_44');
+        map.getPane('pane_BCIMTerra_Indigenaponto_44').style.zIndex = 444;
+        map.getPane('pane_BCIMTerra_Indigenaponto_44').style['mix-blend-mode'] = 'normal';
+        function pointToLayer_BCIMTerra_Indigenaponto_44_0(feature, latlng) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            return L.circleMarker(latlng, style_BCIMTerra_Indigenaponto_44_0(feature));
+        }
+        var layer_BCIMTerra_Indigenaponto_44 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BCIMTerra_Indigenaponto_44',
+            layerName: 'layer_BCIMTerra_Indigenaponto_44',
+            pane: 'pane_BCIMTerra_Indigenaponto_44',
+            pointToLayer: pointToLayer_BCIMTerra_Indigenaponto_44_0,
+            onEachFeature: pop_BCIMTerra_Indigenaponto_44
+        });
+        function getBCIMTerra_Indigenaponto_44Json(geojson) {
+            layer_BCIMTerra_Indigenaponto_44.addData(geojson);
+            setBounds();
+        };
+        bounds_group.addLayer(layer_BCIMTerra_Indigenaponto_44);
+        map.addLayer(layer_BCIMTerra_Indigenaponto_44);
+        function pop_IBGETerraindigena_45(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_IBGETerraindigena_45_0() {
+            return {
+                pane: 'pane_IBGETerraindigena_45',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(193,232,63,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_IBGETerraindigena_45');
+        map.getPane('pane_IBGETerraindigena_45').style.zIndex = 445;
+        map.getPane('pane_IBGETerraindigena_45').style['mix-blend-mode'] = 'normal';
+        var layer_IBGETerraindigena_45 = new L.geoJson(json_IBGETerraindigena_45, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_IBGETerraindigena_45',
+            layerName: 'layer_IBGETerraindigena_45',
+            pane: 'pane_IBGETerraindigena_45',
+            onEachFeature: pop_IBGETerraindigena_45,
+            style: style_IBGETerraindigena_45_0,
+        });
+        bounds_group.addLayer(layer_IBGETerraindigena_45);
+        map.addLayer(layer_IBGETerraindigena_45);
+        function pop_TerraIndigena_46(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_TerraIndigena_46_0() {
+            return {
+                pane: 'pane_TerraIndigena_46',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,139,143,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TerraIndigena_46');
+        map.getPane('pane_TerraIndigena_46').style.zIndex = 446;
+        map.getPane('pane_TerraIndigena_46').style['mix-blend-mode'] = 'normal';
+        var layer_TerraIndigena_46 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TerraIndigena_46',
+            layerName: 'layer_TerraIndigena_46',
+            style: style_TerraIndigena_46_0,
+            pane: 'pane_TerraIndigena_46',
+            onEachFeature: pop_TerraIndigena_46
+        });
+        function getTerraIndigena_46Json(geojson) {
+            layer_TerraIndigena_46.addData(geojson);
+        };
+        bounds_group.addLayer(layer_TerraIndigena_46);
+        map.addLayer(layer_TerraIndigena_46);
+        function pop_BCIMTerra_Indigenarea_47(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BCIMTerra_Indigenarea_47_0() {
+            return {
+                pane: 'pane_BCIMTerra_Indigenarea_47',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BCIMTerra_Indigenarea_47');
+        map.getPane('pane_BCIMTerra_Indigenarea_47').style.zIndex = 447;
+        map.getPane('pane_BCIMTerra_Indigenarea_47').style['mix-blend-mode'] = 'normal';
+        var layer_BCIMTerra_Indigenarea_47 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BCIMTerra_Indigenarea_47',
+            layerName: 'layer_BCIMTerra_Indigenarea_47',
+            style: style_BCIMTerra_Indigenarea_47_0,
+            pane: 'pane_BCIMTerra_Indigenarea_47',
+            onEachFeature: pop_BCIMTerra_Indigenarea_47
+        });
+        function getBCIMTerra_Indigenarea_47Json(geojson) {
+            layer_BCIMTerra_Indigenarea_47.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BCIMTerra_Indigenarea_47);
+        map.addLayer(layer_BCIMTerra_Indigenarea_47);
+        function pop_BC250_2019TerraIndigenarea_48(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_BC250_2019TerraIndigenarea_48_0() {
+            return {
+                pane: 'pane_BC250_2019TerraIndigenarea_48',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BC250_2019TerraIndigenarea_48');
+        map.getPane('pane_BC250_2019TerraIndigenarea_48').style.zIndex = 448;
+        map.getPane('pane_BC250_2019TerraIndigenarea_48').style['mix-blend-mode'] = 'normal';
+        var layer_BC250_2019TerraIndigenarea_48 = L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BC250_2019TerraIndigenarea_48',
+            layerName: 'layer_BC250_2019TerraIndigenarea_48',
+            style: style_BC250_2019TerraIndigenarea_48_0,
+            pane: 'pane_BC250_2019TerraIndigenarea_48',
+            onEachFeature: pop_BC250_2019TerraIndigenarea_48
+        });
+        function getBC250_2019TerraIndigenarea_48Json(geojson) {
+            layer_BC250_2019TerraIndigenarea_48.addData(geojson);
+        };
+        bounds_group.addLayer(layer_BC250_2019TerraIndigenarea_48);
+        map.addLayer(layer_BC250_2019TerraIndigenarea_48);
+        map.createPane('pane_OSMStandard_49');
+        map.getPane('pane_OSMStandard_49').style.zIndex = 449;
+        var layer_OSMStandard_49 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_49',
             opacity: 1.0,
             attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 27,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
         });
-        layer_OSMStandard_0;
-        map.addLayer(layer_OSMStandard_0);
-        function pop_wf_1(feature, layer) {
+        layer_OSMStandard_49;
+        map.addLayer(layer_OSMStandard_49);
+        function pop_Minriodeferroorigemdestino_50(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -98,78 +2355,805 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Location</strong><br />' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Year</strong><br />' + (feature.properties['Year'] !== null ? Autolinker.link(String(feature.properties['Year'])) : '') + '</td>\
+                        <th scope="row">id_lig</th>\
+                        <td>' + (feature.properties['id_lig'] !== null ? autolinker.link(feature.properties['id_lig'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Dates</strong><br />' + (feature.properties['Dates'] !== null ? Autolinker.link(String(feature.properties['Dates'])) : '') + '</td>\
+                        <th scope="row">codmun_o</th>\
+                        <td>' + (feature.properties['codmun_o'] !== null ? autolinker.link(feature.properties['codmun_o'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Theme</strong><br />' + (feature.properties['Theme'] !== null ? Autolinker.link(String(feature.properties['Theme'])) : '') + '</td>\
+                        <th scope="row">mun_o</th>\
+                        <td>' + (feature.properties['mun_o'] !== null ? autolinker.link(feature.properties['mun_o'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Notables</strong><br />' + (feature.properties['Notables'] !== null ? Autolinker.link(String(feature.properties['Notables'])) : '') + '</td>\
+                        <th scope="row">cod_tf_o</th>\
+                        <td>' + (feature.properties['cod_tf_o'] !== null ? autolinker.link(feature.properties['cod_tf_o'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Visitors in millions</strong><br />' + (feature.properties['Visitors in millions'] !== null ? Autolinker.link(String(feature.properties['Visitors in millions'])) : '') + '</td>\
+                        <th scope="row">t_fer_o</th>\
+                        <td>' + (feature.properties['t_fer_o'] !== null ? autolinker.link(feature.properties['t_fer_o'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Type</strong><br />' + (feature.properties['Type'] !== null ? Autolinker.link(String(feature.properties['Type'])) : '') + '</td>\
+                        <th scope="row">codmun_d</th>\
+                        <td>' + (feature.properties['codmun_d'] !== null ? autolinker.link(feature.properties['codmun_d'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>No. countries represented</strong><br />' + (feature.properties['No. countries represented'] !== null ? Autolinker.link(String(feature.properties['No. countries represented'])) : '') + '</td>\
+                        <th scope="row">mun_d</th>\
+                        <td>' + (feature.properties['mun_d'] !== null ? autolinker.link(feature.properties['mun_d'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Thumbnail'] !== null ? Autolinker.link(String(feature.properties['Thumbnail'])) : '') + '</td>\
+                        <th scope="row">c_tf_dest</th>\
+                        <td>' + (feature.properties['c_tf_dest'] !== null ? autolinker.link(feature.properties['c_tf_dest'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Image Source'] !== null ? Autolinker.link(String(feature.properties['Image Source'])) : '') + '</td>\
+                        <th scope="row">t_fer_d</th>\
+                        <td>' + (feature.properties['t_fer_d'] !== null ? autolinker.link(feature.properties['t_fer_d'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Image Link'] !== null ? Autolinker.link(String(feature.properties['Image Link'])) : '') + '</td>\
+                        <th scope="row">cod_merc</th>\
+                        <td>' + (feature.properties['cod_merc'] !== null ? autolinker.link(feature.properties['cod_merc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">mercadoria</th>\
+                        <td>' + (feature.properties['mercadoria'] !== null ? autolinker.link(feature.properties['mercadoria'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">subgrupo</th>\
+                        <td>' + (feature.properties['subgrupo'] !== null ? autolinker.link(feature.properties['subgrupo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">grupo</th>\
+                        <td>' + (feature.properties['grupo'] !== null ? autolinker.link(feature.properties['grupo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tu</th>\
+                        <td>' + (feature.properties['tu'] !== null ? autolinker.link(feature.properties['tu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">an040807</th>\
+                        <td>' + (feature.properties['an040807'] !== null ? autolinker.link(feature.properties['an040807'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_wf_1_0() {
-            return {
-                pane: 'pane_wf_1',
-                radius: 8.0,
+        function style_Minriodeferroorigemdestino_50_0(feature) {
+            if (feature.properties['format_number("tu",0)'] >= 1.814000 && feature.properties['format_number("tu",0)'] <= 31.758000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
                 opacity: 1,
-                color: 'rgba(61,128,53,1.0)',
+                color: 'rgba(236,32,168,1.0)',
                 dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 31.758000 && feature.properties['format_number("tu",0)'] <= 85.000000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 85.000000 && feature.properties['format_number("tu",0)'] <= 166.997000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
                 weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(84,176,74,1.0)',
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 166.997000 && feature.properties['format_number("tu",0)'] <= 281.812000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 281.812000 && feature.properties['format_number("tu",0)'] <= 465.636000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 465.636000 && feature.properties['format_number("tu",0)'] <= 640.027000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 640.027000 && feature.properties['format_number("tu",0)'] <= 848.784000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['format_number("tu",0)'] >= 848.784000 && feature.properties['format_number("tu",0)'] <= 955.357000 ) {
+                return {
+                pane: 'pane_Minriodeferroorigemdestino_50',
+                opacity: 1,
+                color: 'rgba(236,32,168,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
             }
         }
-        map.createPane('pane_wf_1');
-        map.getPane('pane_wf_1').style.zIndex = 401;
-        map.getPane('pane_wf_1').style['mix-blend-mode'] = 'normal';
-        var layer_wf_1 = new L.geoJson(json_wf_1, {
+        map.createPane('pane_Minriodeferroorigemdestino_50');
+        map.getPane('pane_Minriodeferroorigemdestino_50').style.zIndex = 450;
+        map.getPane('pane_Minriodeferroorigemdestino_50').style['mix-blend-mode'] = 'normal';
+        var layer_Minriodeferroorigemdestino_50 = new L.geoJson(json_Minriodeferroorigemdestino_50, {
             attribution: '',
-            pane: 'pane_wf_1',
-            onEachFeature: pop_wf_1,
+            interactive: true,
+            dataVar: 'json_Minriodeferroorigemdestino_50',
+            layerName: 'layer_Minriodeferroorigemdestino_50',
+            pane: 'pane_Minriodeferroorigemdestino_50',
+            onEachFeature: pop_Minriodeferroorigemdestino_50,
+            style: style_Minriodeferroorigemdestino_50_0,
+        });
+        bounds_group.addLayer(layer_Minriodeferroorigemdestino_50);
+        map.addLayer(layer_Minriodeferroorigemdestino_50);
+        function pop_Terminaisferrovirios_51(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">objectid</th>\
+                        <td>' + (feature.properties['objectid'] !== null ? autolinker.link(feature.properties['objectid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nm_municip</th>\
+                        <td>' + (feature.properties['nm_municip'] !== null ? autolinker.link(feature.properties['nm_municip'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">codigo</th>\
+                        <td>' + (feature.properties['codigo'] !== null ? autolinker.link(feature.properties['codigo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">codmun</th>\
+                        <td>' + (feature.properties['codmun'] !== null ? autolinker.link(feature.properties['codmun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nome_mun</th>\
+                        <td>' + (feature.properties['nome_mun'] !== null ? autolinker.link(feature.properties['nome_mun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">cod_tf</th>\
+                        <td>' + (feature.properties['cod_tf'] !== null ? autolinker.link(feature.properties['cod_tf'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">term_ferr</th>\
+                        <td>' + (feature.properties['term_ferr'] !== null ? autolinker.link(feature.properties['term_ferr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">mercadoria</th>\
+                        <td>' + (feature.properties['mercadoria'] !== null ? autolinker.link(feature.properties['mercadoria'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">cod_merc</th>\
+                        <td>' + (feature.properties['cod_merc'] !== null ? autolinker.link(feature.properties['cod_merc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">subgrupo</th>\
+                        <td>' + (feature.properties['subgrupo'] !== null ? autolinker.link(feature.properties['subgrupo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">grupo</th>\
+                        <td>' + (feature.properties['grupo'] !== null ? autolinker.link(feature.properties['grupo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tu</th>\
+                        <td>' + (feature.properties['tu'] !== null ? autolinker.link(feature.properties['tu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">an040804</th>\
+                        <td>' + (feature.properties['an040804'] !== null ? autolinker.link(feature.properties['an040804'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Terminaisferrovirios_51_0() {
+            return {
+                pane: 'pane_Terminaisferrovirios_51',
+                radius: 3.2,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,61,134,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Terminaisferrovirios_51');
+        map.getPane('pane_Terminaisferrovirios_51').style.zIndex = 451;
+        map.getPane('pane_Terminaisferrovirios_51').style['mix-blend-mode'] = 'normal';
+        var layer_Terminaisferrovirios_51 = new L.geoJson(json_Terminaisferrovirios_51, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Terminaisferrovirios_51',
+            layerName: 'layer_Terminaisferrovirios_51',
+            pane: 'pane_Terminaisferrovirios_51',
+            onEachFeature: pop_Terminaisferrovirios_51,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_wf_1_0(feature));
+                return L.circleMarker(latlng, style_Terminaisferrovirios_51_0(feature));
             },
         });
-        var cluster_wf_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
-        cluster_wf_1.addLayer(layer_wf_1);
+        bounds_group.addLayer(layer_Terminaisferrovirios_51);
+        map.addLayer(layer_Terminaisferrovirios_51);
+        function pop_TrechoferrovirioADM_52(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nome</th>\
+                        <td>' + (feature.properties['nome'] !== null ? autolinker.link(feature.properties['nome'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geometriaaproximada</th>\
+                        <td>' + (feature.properties['geometriaaproximada'] !== null ? autolinker.link(feature.properties['geometriaaproximada'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">codtrechoferrov</th>\
+                        <td>' + (feature.properties['codtrechoferrov'] !== null ? autolinker.link(feature.properties['codtrechoferrov'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">posicaorelativa</th>\
+                        <td>' + (feature.properties['posicaorelativa'] !== null ? autolinker.link(feature.properties['posicaorelativa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tipotrechoferrov</th>\
+                        <td>' + (feature.properties['tipotrechoferrov'] !== null ? autolinker.link(feature.properties['tipotrechoferrov'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bitola</th>\
+                        <td>' + (feature.properties['bitola'] !== null ? autolinker.link(feature.properties['bitola'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">eletrificada</th>\
+                        <td>' + (feature.properties['eletrificada'] !== null ? autolinker.link(feature.properties['eletrificada'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nrlinhas</th>\
+                        <td>' + (feature.properties['nrlinhas'] !== null ? autolinker.link(feature.properties['nrlinhas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">jurisdicao</th>\
+                        <td>' + (feature.properties['jurisdicao'] !== null ? autolinker.link(feature.properties['jurisdicao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">administracao</th>\
+                        <td>' + (feature.properties['administracao'] !== null ? autolinker.link(feature.properties['administracao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">concessionaria</th>\
+                        <td>' + (feature.properties['concessionaria'] !== null ? autolinker.link(feature.properties['concessionaria'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">operacional</th>\
+                        <td>' + (feature.properties['operacional'] !== null ? autolinker.link(feature.properties['operacional'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">situacaofisica</th>\
+                        <td>' + (feature.properties['situacaofisica'] !== null ? autolinker.link(feature.properties['situacaofisica'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">cargasuportmaxima</th>\
+                        <td>' + (feature.properties['cargasuportmaxima'] !== null ? autolinker.link(feature.properties['cargasuportmaxima'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">emarruamento</th>\
+                        <td>' + (feature.properties['emarruamento'] !== null ? autolinker.link(feature.properties['emarruamento'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
 
-        bounds_group.addLayer(layer_wf_1);
-        cluster_wf_1.addTo(map);
+        function style_TrechoferrovirioADM_52_0(feature) {
+            switch(String(feature.properties['administracao'])) {
+                case 'Concessionada':
+                    return {
+                pane: 'pane_TrechoferrovirioADM_52',
+                opacity: 1,
+                color: 'rgba(240,46,230,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Privada':
+                    return {
+                pane: 'pane_TrechoferrovirioADM_52',
+                opacity: 1,
+                color: 'rgba(90,68,202,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '[\'Estadual/Distrital\', \'Federal\', \'Municipal\']':
+                    return {
+                pane: 'pane_TrechoferrovirioADM_52',
+                opacity: 1,
+                color: 'rgba(109,194,234,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Desconhecida':
+                    return {
+                pane: 'pane_TrechoferrovirioADM_52',
+                opacity: 1,
+                color: 'rgba(157,230,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_TrechoferrovirioADM_52',
+                opacity: 1,
+                color: 'rgba(75,209,138,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_TrechoferrovirioADM_52');
+        map.getPane('pane_TrechoferrovirioADM_52').style.zIndex = 452;
+        map.getPane('pane_TrechoferrovirioADM_52').style['mix-blend-mode'] = 'normal';
+        var layer_TrechoferrovirioADM_52 = new L.geoJson(json_TrechoferrovirioADM_52, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TrechoferrovirioADM_52',
+            layerName: 'layer_TrechoferrovirioADM_52',
+            pane: 'pane_TrechoferrovirioADM_52',
+            onEachFeature: pop_TrechoferrovirioADM_52,
+            style: style_TrechoferrovirioADM_52_0,
+        });
+        bounds_group.addLayer(layer_TrechoferrovirioADM_52);
+        map.addLayer(layer_TrechoferrovirioADM_52);
+        function pop_Territrioindgena_53(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nome</th>\
+                        <td>' + (feature.properties['nome'] !== null ? autolinker.link(feature.properties['nome'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geometriaaproximada</th>\
+                        <td>' + (feature.properties['geometriaaproximada'] !== null ? autolinker.link(feature.properties['geometriaaproximada'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">codidentificadorunico</th>\
+                        <td>' + (feature.properties['codidentificadorunico'] !== null ? autolinker.link(feature.properties['codidentificadorunico'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">arealegal</th>\
+                        <td>' + (feature.properties['arealegal'] !== null ? autolinker.link(feature.properties['arealegal'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">classificacao</th>\
+                        <td>' + (feature.properties['classificacao'] !== null ? autolinker.link(feature.properties['classificacao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">administracao</th>\
+                        <td>' + (feature.properties['administracao'] !== null ? autolinker.link(feature.properties['administracao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">jurisdicao</th>\
+                        <td>' + (feature.properties['jurisdicao'] !== null ? autolinker.link(feature.properties['jurisdicao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">situacaojuridica</th>\
+                        <td>' + (feature.properties['situacaojuridica'] !== null ? autolinker.link(feature.properties['situacaojuridica'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">datasituacaojuridica</th>\
+                        <td>' + (feature.properties['datasituacaojuridica'] !== null ? autolinker.link(feature.properties['datasituacaojuridica'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">grupoetnico</th>\
+                        <td>' + (feature.properties['grupoetnico'] !== null ? autolinker.link(feature.properties['grupoetnico'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">perimetrooficial</th>\
+                        <td>' + (feature.properties['perimetrooficial'] !== null ? autolinker.link(feature.properties['perimetrooficial'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">id_objeto</th>\
+                        <td>' + (feature.properties['id_objeto'] !== null ? autolinker.link(feature.properties['id_objeto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nomeabrev</th>\
+                        <td>' + (feature.properties['nomeabrev'] !== null ? autolinker.link(feature.properties['nomeabrev'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">areaoficialha</th>\
+                        <td>' + (feature.properties['areaoficialha'] !== null ? autolinker.link(feature.properties['areaoficialha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nometi</th>\
+                        <td>' + (feature.properties['nometi'] !== null ? autolinker.link(feature.properties['nometi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">layer</th>\
+                        <td>' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">path</th>\
+                        <td>' + (feature.properties['path'] !== null ? autolinker.link(feature.properties['path'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Territrioindgena_53_0() {
+            return {
+                pane: 'pane_Territrioindgena_53',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,41,246,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Territrioindgena_53');
+        map.getPane('pane_Territrioindgena_53').style.zIndex = 453;
+        map.getPane('pane_Territrioindgena_53').style['mix-blend-mode'] = 'normal';
+        var layer_Territrioindgena_53 = new L.geoJson(json_Territrioindgena_53, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Territrioindgena_53',
+            layerName: 'layer_Territrioindgena_53',
+            pane: 'pane_Territrioindgena_53',
+            onEachFeature: pop_Territrioindgena_53,
+            style: style_Territrioindgena_53_0,
+        });
+        bounds_group.addLayer(layer_Territrioindgena_53);
+        map.addLayer(layer_Territrioindgena_53);
+        function pop_Unidadedeconservao_54(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NomeUC</th>\
+                        <td>' + (feature.properties['NomeUC'] !== null ? autolinker.link(feature.properties['NomeUC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Cnuc</th>\
+                        <td>' + (feature.properties['Cnuc'] !== null ? autolinker.link(feature.properties['Cnuc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CriacaoAno</th>\
+                        <td>' + (feature.properties['CriacaoAno'] !== null ? autolinker.link(feature.properties['CriacaoAno'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AreaHaAlb</th>\
+                        <td>' + (feature.properties['AreaHaAlb'] !== null ? autolinker.link(feature.properties['AreaHaAlb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PerimM</th>\
+                        <td>' + (feature.properties['PerimM'] !== null ? autolinker.link(feature.properties['PerimM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CriacaoAto</th>\
+                        <td>' + (feature.properties['CriacaoAto'] !== null ? autolinker.link(feature.properties['CriacaoAto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EsferaAdm</th>\
+                        <td>' + (feature.properties['EsferaAdm'] !== null ? autolinker.link(feature.properties['EsferaAdm'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SiglaCateg</th>\
+                        <td>' + (feature.properties['SiglaCateg'] !== null ? autolinker.link(feature.properties['SiglaCateg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GrupoUC</th>\
+                        <td>' + (feature.properties['GrupoUC'] !== null ? autolinker.link(feature.properties['GrupoUC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UFAbrang</th>\
+                        <td>' + (feature.properties['UFAbrang'] !== null ? autolinker.link(feature.properties['UFAbrang'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BiomaIBGE</th>\
+                        <td>' + (feature.properties['BiomaIBGE'] !== null ? autolinker.link(feature.properties['BiomaIBGE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BiomaCRL</th>\
+                        <td>' + (feature.properties['BiomaCRL'] !== null ? autolinker.link(feature.properties['BiomaCRL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GRegional</th>\
+                        <td>' + (feature.properties['GRegional'] !== null ? autolinker.link(feature.properties['GRegional'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FusoAbrang</th>\
+                        <td>' + (feature.properties['FusoAbrang'] !== null ? autolinker.link(feature.properties['FusoAbrang'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Demarcacao</th>\
+                        <td>' + (feature.properties['Demarcacao'] !== null ? autolinker.link(feature.properties['Demarcacao'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EscalaUC</th>\
+                        <td>' + (feature.properties['EscalaUC'] !== null ? autolinker.link(feature.properties['EscalaUC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NGI</th>\
+                        <td>' + (feature.properties['NGI'] !== null ? autolinker.link(feature.properties['NGI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Unidadedeconservao_54_0() {
+            return {
+                pane: 'pane_Unidadedeconservao_54',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,23,220,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Unidadedeconservao_54');
+        map.getPane('pane_Unidadedeconservao_54').style.zIndex = 454;
+        map.getPane('pane_Unidadedeconservao_54').style['mix-blend-mode'] = 'normal';
+        var layer_Unidadedeconservao_54 = new L.geoJson(json_Unidadedeconservao_54, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Unidadedeconservao_54',
+            layerName: 'layer_Unidadedeconservao_54',
+            pane: 'pane_Unidadedeconservao_54',
+            onEachFeature: pop_Unidadedeconservao_54,
+            style: style_Unidadedeconservao_54_0,
+        });
+        bounds_group.addLayer(layer_Unidadedeconservao_54);
+        map.addLayer(layer_Unidadedeconservao_54);
+        function pop_ANMMinriodeferro_55(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROCESSO</th>\
+                        <td>' + (feature.properties['PROCESSO'] !== null ? autolinker.link(feature.properties['PROCESSO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMERO</th>\
+                        <td>' + (feature.properties['NUMERO'] !== null ? autolinker.link(feature.properties['NUMERO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ANO</th>\
+                        <td>' + (feature.properties['ANO'] !== null ? autolinker.link(feature.properties['ANO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AREA_HA</th>\
+                        <td>' + (feature.properties['AREA_HA'] !== null ? autolinker.link(feature.properties['AREA_HA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FASE</th>\
+                        <td>' + (feature.properties['FASE'] !== null ? autolinker.link(feature.properties['FASE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ULT_EVENTO</th>\
+                        <td>' + (feature.properties['ULT_EVENTO'] !== null ? autolinker.link(feature.properties['ULT_EVENTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOME</th>\
+                        <td>' + (feature.properties['NOME'] !== null ? autolinker.link(feature.properties['NOME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUBS</th>\
+                        <td>' + (feature.properties['SUBS'] !== null ? autolinker.link(feature.properties['SUBS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">USO</th>\
+                        <td>' + (feature.properties['USO'] !== null ? autolinker.link(feature.properties['USO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">UF</th>\
+                        <td>' + (feature.properties['UF'] !== null ? autolinker.link(feature.properties['UF'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DSProcesso</th>\
+                        <td>' + (feature.properties['DSProcesso'] !== null ? autolinker.link(feature.properties['DSProcesso'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ANMMinriodeferro_55_0(feature) {
+            switch(String(feature.properties['FASE'])) {
+                case '[\'CONCESSÃO DE LAVRA\', \'DISPONIBILIDADE\']':
+                    return {
+                pane: 'pane_ANMMinriodeferro_55',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,125,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '[\'APTO PARA DISPONIBILIDADE\', \'DIREITO DE REQUERER A LAVRA\']':
+                    return {
+                pane: 'pane_ANMMinriodeferro_55',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,185,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '[\'LICENCIAMENTO\', \'REQUERIMENTO DE LAVRA\', \'REQUERIMENTO DE LICENCIAMENTO\']':
+                    return {
+                pane: 'pane_ANMMinriodeferro_55',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,239,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '[\'REQUERIMENTO DE PESQUISA\', \'AUTORIZAÇÃO DE PESQUISA\']':
+                    return {
+                pane: 'pane_ANMMinriodeferro_55',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,184,195,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_ANMMinriodeferro_55',
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,184,221,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ANMMinriodeferro_55');
+        map.getPane('pane_ANMMinriodeferro_55').style.zIndex = 455;
+        map.getPane('pane_ANMMinriodeferro_55').style['mix-blend-mode'] = 'normal';
+        var layer_ANMMinriodeferro_55 = new L.geoJson(json_ANMMinriodeferro_55, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ANMMinriodeferro_55',
+            layerName: 'layer_ANMMinriodeferro_55',
+            pane: 'pane_ANMMinriodeferro_55',
+            onEachFeature: pop_ANMMinriodeferro_55,
+            style: style_ANMMinriodeferro_55_0,
+        });
+        bounds_group.addLayer(layer_ANMMinriodeferro_55);
+        map.addLayer(layer_ANMMinriodeferro_55);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -180,7 +3164,64 @@
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
-        setBounds();
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'ANM - Minério de ferro<br /><table><tr><td style="text-align: center;"><img src="legend/ANMMinriodeferro_55_Disponívelemoperação0.png" /></td><td>Disponível - em operação</td></tr><tr><td style="text-align: center;"><img src="legend/ANMMinriodeferro_55_Disponívelaguardando1.png" /></td><td>Disponível - aguardando</td></tr><tr><td style="text-align: center;"><img src="legend/ANMMinriodeferro_55_Requerimentoexploração2.png" /></td><td>Requerimento exploração</td></tr><tr><td style="text-align: center;"><img src="legend/ANMMinriodeferro_55_Pesquisa3.png" /></td><td>Pesquisa</td></tr><tr><td style="text-align: center;"><img src="legend/ANMMinriodeferro_55_4.png" /></td><td></td></tr></table>': layer_ANMMinriodeferro_55,'<img src="legend/Unidadedeconservao_54.png" /> Unidade de conservação': layer_Unidadedeconservao_54,'<img src="legend/Territrioindgena_53.png" /> Território indígena': layer_Territrioindgena_53,'Trecho ferroviário - ADM<br /><table><tr><td style="text-align: center;"><img src="legend/TrechoferrovirioADM_52_Concessionada0.png" /></td><td>Concessionada</td></tr><tr><td style="text-align: center;"><img src="legend/TrechoferrovirioADM_52_Privada1.png" /></td><td>Privada</td></tr><tr><td style="text-align: center;"><img src="legend/TrechoferrovirioADM_52_Pública2.png" /></td><td>Pública</td></tr><tr><td style="text-align: center;"><img src="legend/TrechoferrovirioADM_52_Desconhecida3.png" /></td><td>Desconhecida</td></tr><tr><td style="text-align: center;"><img src="legend/TrechoferrovirioADM_52_4.png" /></td><td></td></tr></table>': layer_TrechoferrovirioADM_52,'<img src="legend/Terminaisferrovirios_51.png" /> Terminais ferroviários': layer_Terminaisferrovirios_51,'Minério de ferro - origem-destino<br /><table><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_2320.png" /></td><td>2 - 32</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_32851.png" /></td><td>32 - 85</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_851672.png" /></td><td>85 - 167</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_1672823.png" /></td><td>167 - 282</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_2824664.png" /></td><td>282 - 466</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_4666405.png" /></td><td>466 - 640</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_6408496.png" /></td><td>640 - 849</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferroorigemdestino_50_8499557.png" /></td><td>849 - 955</td></tr></table>': layer_Minriodeferroorigemdestino_50,"OSM Standard": layer_OSMStandard_49,'<img src="legend/BC250_2019TerraIndigenarea_48.png" /> BC250_2019 Terra Indigena (Área)': layer_BC250_2019TerraIndigenarea_48,'<img src="legend/BCIMTerra_Indigenarea_47.png" /> BCIM Terra_Indigena (área)': layer_BCIMTerra_Indigenarea_47,'<img src="legend/TerraIndigena_46.png" /> Terra Indigena': layer_TerraIndigena_46,'<img src="legend/IBGETerraindigena_45.png" /> IBGE - Terra indigena': layer_IBGETerraindigena_45,'<img src="legend/BCIMTerra_Indigenaponto_44.png" /> BCIM Terra_Indigena (ponto)': layer_BCIMTerra_Indigenaponto_44,'<img src="legend/BCIMAldeia_Indigenaponto_43.png" /> BCIM Aldeia_Indigena (ponto)': layer_BCIMAldeia_Indigenaponto_43,'<img src="legend/BC25AldeiaIndigenaPonto_42.png" /> BC25 Aldeia Indigena (Ponto)': layer_BC25AldeiaIndigenaPonto_42,'<img src="legend/BC250_2021ExtMineralrea_41.png" /> BC250_2021 Ext Mineral (Área)': layer_BC250_2021ExtMineralrea_41,'<img src="legend/reasespeciaisdeproteoeconservaodabiodiversidade_40.png" /> Áreas especiais de proteção e conservação da biodiversidade': layer_reasespeciaisdeproteoeconservaodabiodiversidade_40,'<img src="legend/BCIMUnidade_Conservacao_Nao_Snucrea_39.png" /> BCIM Unidade_Conservacao_Nao_Snuc (Área)': layer_BCIMUnidade_Conservacao_Nao_Snucrea_39,'<img src="legend/UnidadedeConservao_38.png" /> Unidade de  Conservação': layer_UnidadedeConservao_38,'<img src="legend/reasespeciaisdeproteoeconservaodabiodiversidade_37.png" /> Áreas especiais de proteção e conservação da biodiversidade': layer_reasespeciaisdeproteoeconservaodabiodiversidade_37,'<img src="legend/Terminaisferroviriosprincipalproduto2020_36.png" /> Terminais ferroviários - principal produto - 2020': layer_Terminaisferroviriosprincipalproduto2020_36,'<img src="legend/Ferrovias_35.png" /> Ferrovias': layer_Ferrovias_35,'<img src="legend/Ferrovia_34.png" /> Ferrovia': layer_Ferrovia_34,'<img src="legend/Ferrovia_33.png" /> Ferrovia': layer_Ferrovia_33,'<img src="legend/Ferrovia_32.png" /> Ferrovia': layer_Ferrovia_32,'<img src="legend/IBGEEmpresastransportedecargaferrovirio2019_31.png" /> IBGE - Empresas transporte de carga, ferroviário - 2019': layer_IBGEEmpresastransportedecargaferrovirio2019_31,'<img src="legend/BCIMTrecho_FerroviarioLinha_30.png" /> BCIM Trecho_Ferroviario (Linha)': layer_BCIMTrecho_FerroviarioLinha_30,'<img src="legend/bc25_sc_2020TrechoFerroviarioLinha_29.png" /> bc25_sc_2020 Trecho Ferroviario (Linha)': layer_bc25_sc_2020TrechoFerroviarioLinha_29,'<img src="legend/BC250_2019TrechoFerroviarioLinha_28.png" /> BC250_2019 Trecho Ferroviario (Linha)': layer_BC250_2019TrechoFerroviarioLinha_28,'<img src="legend/BC250_2017TrechoFerrovirioLinha_27.png" /> BC250_2017 Trecho Ferroviário (Linha)': layer_BC250_2017TrechoFerrovirioLinha_27,'<img src="legend/BC25TrechoFerroviarioLinha_26.png" /> BC25 Trecho Ferroviario (Linha)': layer_BC25TrechoFerroviarioLinha_26,'<img src="legend/BC25PontoFerroviarioPonto_25.png" /> BC25 Ponto Ferroviario (Ponto)': layer_BC25PontoFerroviarioPonto_25,'<img src="legend/BC100_SE_2019TrechoFerroviarioLinha_24.png" /> BC100_SE_2019 Trecho Ferroviario (Linha)': layer_BC100_SE_2019TrechoFerroviarioLinha_24,'<img src="legend/BC100_RS_2021TrechoFerroviarioLinha_23.png" /> BC100_RS_2021 Trecho Ferroviario (Linha)': layer_BC100_RS_2021TrechoFerroviarioLinha_23,'<img src="legend/BC100_ESTrechoFerroviarioLinha_22.png" /> BC100_ES Trecho Ferroviario (Linha)': layer_BC100_ESTrechoFerroviarioLinha_22,'<img src="legend/BC100TrechoFerroviarioL_21.png" /> BC100 Trecho Ferroviario L': layer_BC100TrechoFerroviarioL_21,'<img src="legend/TrechoFerrovirio_20.png" /> Trecho Ferroviário': layer_TrechoFerrovirio_20,'<img src="legend/Terminaisferroviriossoja2020_19.png" /> Terminais ferroviários, soja - 2020': layer_Terminaisferroviriossoja2020_19,'<img src="legend/Terminaisferroviriosmilho2020_18.png" /> Terminais ferroviários, milho - 2020': layer_Terminaisferroviriosmilho2020_18,'<img src="legend/RedeFerroviria2007_17.png" /> Rede Ferroviária 2007': layer_RedeFerroviria2007_17,'<img src="legend/RedeFerroviria1999_16.png" /> Rede Ferroviária 1999': layer_RedeFerroviria1999_16,'<img src="legend/RedeFerroviria1985_15.png" /> Rede Ferroviária 1985': layer_RedeFerroviria1985_15,'<img src="legend/RedeFerroviria1964_14.png" /> Rede Ferroviária 1964': layer_RedeFerroviria1964_14,'<img src="legend/RedeFerroviria1910_13.png" /> Rede Ferroviária 1910': layer_RedeFerroviria1910_13,'Origem-destino carga ferroviária - 2020<br /><table><tr><td style="text-align: center;"><img src="legend/Origemdestinocargaferroviria2020_12_Outros0.png" /></td><td>Outros</td></tr><tr><td style="text-align: center;"><img src="legend/Origemdestinocargaferroviria2020_12_MinériodeFerro1.png" /></td><td>Minério de Ferro</td></tr><tr><td style="text-align: center;"><img src="legend/Origemdestinocargaferroviria2020_12_MinériodeFerroEspecialMRSdistanciamenor100km2.png" /></td><td>Minério de Ferro Especial - MRS distancia menor 100 km</td></tr><tr><td style="text-align: center;"><img src="legend/Origemdestinocargaferroviria2020_12_3.png" /></td><td></td></tr></table>': layer_Origemdestinocargaferroviria2020_12,'Minério de ferro - 2020 (tu)<br /><table><tr><td style="text-align: center;"><img src="legend/Minriodeferro2020tu_11_22100.png" /></td><td>2 - 210</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferro2020tu_11_2105101.png" /></td><td>210 - 510</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferro2020tu_11_5109552.png" /></td><td>510 - 955</td></tr></table>': layer_Minriodeferro2020tu_11,'Minério de ferro (tu)<br /><table><tr><td style="text-align: center;"><img src="legend/Minriodeferrotu_10_21040.png" /></td><td>2 - 104</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferrotu_10_1042821.png" /></td><td>104 - 282</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferrotu_10_2825102.png" /></td><td>282 - 510</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferrotu_10_5107283.png" /></td><td>510 - 728</td></tr><tr><td style="text-align: center;"><img src="legend/Minriodeferrotu_10_7289554.png" /></td><td>728 - 955</td></tr></table>': layer_Minriodeferrotu_10,'Milho - 2020<br /><table><tr><td style="text-align: center;"><img src="legend/Milho2020_9_12230.png" /></td><td>1 - 223</td></tr><tr><td style="text-align: center;"><img src="legend/Milho2020_9_2235651.png" /></td><td>223 - 565</td></tr><tr><td style="text-align: center;"><img src="legend/Milho2020_9_5659832.png" /></td><td>565 - 983</td></tr></table>': layer_Milho2020_9,'Soja - 2020<br /><table><tr><td style="text-align: center;"><img src="legend/Soja2020_8_21300.png" /></td><td>2 - 130</td></tr><tr><td style="text-align: center;"><img src="legend/Soja2020_8_1304941.png" /></td><td>130 - 494</td></tr><tr><td style="text-align: center;"><img src="legend/Soja2020_8_4949592.png" /></td><td>494 - 959</td></tr></table>': layer_Soja2020_8,"Indústria Extrativa 2020": layer_IndstriaExtrativa2020_7,'<img src="legend/IndstriaExtrativa2020_6.png" /> Indústria Extrativa 2020': layer_IndstriaExtrativa2020_6,"IBAMA_conservacao": layer_IBAMA_conservacao_5,'<img src="legend/Prioridadeparaconservaodecreto5092_4.png" /> Prioridade para conservação decreto 5092': layer_Prioridadeparaconservaodecreto5092_4,'<img src="legend/PrioridadedeconservaoAmaznia_3.png" /> Prioridade de conservação Amazônia': layer_PrioridadedeconservaoAmaznia_3,'<img src="legend/PrioridadeconservaoMataAtlntica_2.png" /> Prioridade conservação Mata Atlântica': layer_PrioridadeconservaoMataAtlntica_2,'<img src="legend/PrioridadeconservaoCaatinga_1.png" /> Prioridade conservação Caatinga': layer_PrioridadeconservaoCaatinga_1,'<img src="legend/ComunicadodeAcidenteAmbientalPblico_0.png" /> Comunicado de Acidente Ambiental Público': layer_ComunicadodeAcidenteAmbientalPblico_0,}).addTo(map);
+        resetLabels([layer_IndstriaExtrativa2020_6,layer_Soja2020_8,layer_Milho2020_9,layer_Minriodeferrotu_10,layer_Minriodeferro2020tu_11,layer_Minriodeferroorigemdestino_50,layer_Terminaisferrovirios_51,layer_Unidadedeconservao_54,layer_ANMMinriodeferro_55]);
+        map.on("zoomend", function(){
+            resetLabels([layer_IndstriaExtrativa2020_6,layer_Soja2020_8,layer_Milho2020_9,layer_Minriodeferrotu_10,layer_Minriodeferro2020tu_11,layer_Minriodeferroorigemdestino_50,layer_Terminaisferrovirios_51,layer_Unidadedeconservao_54,layer_ANMMinriodeferro_55]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_IndstriaExtrativa2020_6,layer_Soja2020_8,layer_Milho2020_9,layer_Minriodeferrotu_10,layer_Minriodeferro2020tu_11,layer_Minriodeferroorigemdestino_50,layer_Terminaisferrovirios_51,layer_Unidadedeconservao_54,layer_ANMMinriodeferro_55]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_IndstriaExtrativa2020_6,layer_Soja2020_8,layer_Milho2020_9,layer_Minriodeferrotu_10,layer_Minriodeferro2020tu_11,layer_Minriodeferroorigemdestino_50,layer_Terminaisferrovirios_51,layer_Unidadedeconservao_54,layer_ANMMinriodeferro_55]);
+        });
         </script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='publica:adm_comunicacidente_p' url='http://siscom.ibama.gov.br/geoserver/ows' url='http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetComunicadodeAcidenteAmbientalPblico_0Json'></script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' typename='publica:adm_prioridade_conservacao_caatinga_a' url='http://siscom.ibama.gov.br/geoserver/ows' url='http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetPrioridadeconservaoCaatinga_1Json'></script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' typename='publica:adm_prioridade_conservacao_mata_atlantica_a' url='http://siscom.ibama.gov.br/geoserver/ows' url='http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetPrioridadeconservaoMataAtlntica_2Json'></script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' typename='publica:adm_prioridade_conservacao_amazonia_a' url='http://siscom.ibama.gov.br/geoserver/ows' url='http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetPrioridadedeconservaoAmaznia_3Json'></script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' typename='publica:adm_prioridade_decreto_5092_a' url='http://siscom.ibama.gov.br/geoserver/ows' url='http://siscom.ibama.gov.br/geoserver/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetPrioridadeparaconservaodecreto5092_4Json'></script>
+        <script src=' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='BNDES:industriaextrativa' url='https://geoservicos.inde.gov.br/geoserver/BNDES/ows' url='https://geoservicos.inde.gov.br/geoserver/BNDES/ows?version=1.3.0' version='auto'&outputFormat=text%2Fjavascript&format_options=callback%3AgetIndstriaExtrativa2020_6Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_origem_dest_carga_ferroviaria_soja' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetSoja2020_8Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_origem_dest_carga_ferroviaria_milho' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetMilho2020_9Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_origem_dest_carga_ferroviaria_ferro' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetMinriodeferrotu_10Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_origem_dest_carga_ferroviaria_ferro' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetMinriodeferro2020tu_11Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_origem_dest_carga_ferroviaria' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetOrigemdestinocargaferroviria2020_12Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_09_rede_ferroviaria_1910' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetRedeFerroviria1910_13Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_09_rede_ferroviaria_1964' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetRedeFerroviria1964_14Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_09_rede_ferroviaria_1985' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetRedeFerroviria1985_15Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_09_rede_ferroviaria_1999' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetRedeFerroviria1999_16Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_09_rede_ferroviaria_2007' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetRedeFerroviria2007_17Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_terminal_ferroviario_milho' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetTerminaisferroviriosmilho2020_18Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_terminal_ferroviario_soja' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetTerminaisferroviriossoja2020_19Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:TIU2017_TRA_TRECHO_FERROVIARIO_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetTrechoFerrovirio_20Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC100_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC100TrechoFerroviarioL_21Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC100_ES_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC100_ESTrechoFerroviarioLinha_22Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC100_RS_2021_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC100_RS_2021TrechoFerroviarioLinha_23Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC100_SE_2019_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC100_SE_2019TrechoFerroviarioLinha_24Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC25_Ponto_Ferroviario_P' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC25PontoFerroviarioPonto_25Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC25_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC25TrechoFerroviarioLinha_26Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC250_2017_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC250_2017TrechoFerrovirioLinha_27Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC250_2019_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC250_2019TrechoFerroviarioLinha_28Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:bc25_sc_2020_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3Agetbc25_sc_2020TrechoFerroviarioLinha_29Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BCIM_Trecho_Ferroviario_L' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBCIMTrecho_FerroviarioLinha_30Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_transporte_carga_empresas_ferro' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetIBGEEmpresastransportedecargaferrovirio2019_31Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:C04_Ferrovia' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetFerrovia_32Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:Ferrovia' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetFerrovia_33Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:LE2015_17_Ferrovia' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetFerrovia_34Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:Ferrovias' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetFerrovias_35Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:andb2022_04_terminal_ferroviario' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetTerminaisferroviriosprincipalproduto2020_36Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_03_apcb' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3Agetreasespeciaisdeproteoeconservaodabiodiversidade_37Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' typename='CGEO:C04_UnidadeConservacao' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetUnidadedeConservao_38Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BCIM_Unidade_Conservacao_Nao_Snuc_A' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBCIMUnidade_Conservacao_Nao_Snucrea_39Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:ANMS2010_03_apcb' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3Agetreasespeciaisdeproteoeconservaodabiodiversidade_40Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC250_2021_Ext_Mineral_A' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC250_2021ExtMineralrea_41Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC25_Aldeia_Indigena_P' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC25AldeiaIndigenaPonto_42Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BCIM_Aldeia_Indigena_P' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBCIMAldeia_Indigenaponto_43Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BCIM_Terra_Indigena_P' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBCIMTerra_Indigenaponto_44Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CGEO:C04_TerraIndigena' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetTerraIndigena_46Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BCIM_Terra_Indigena_A' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBCIMTerra_Indigenarea_47Json'></script>
+        <script src=' pageSize='1600000' pagingEnabled='true' preferCoordinatesForWfsT11='false' srsname='EPSG:4674' typename='CCAR:BC250_2019_Terra_Indigena_A' url='https://geoservicos.ibge.gov.br/geoserver/ows' url='https://geoservicos.ibge.gov.br/geoserver/ows?version=1.3.0' version='2.0.0'&outputFormat=text%2Fjavascript&format_options=callback%3AgetBC250_2019TerraIndigenarea_48Json'></script>
     </body>
 </html>

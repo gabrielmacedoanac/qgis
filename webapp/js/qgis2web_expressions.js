@@ -88,7 +88,7 @@ function fnc_ln(values, context) {
 };
 
 function fnc_log10(values, context) {
-    return Math.LN10(values[0]);
+    return Math.log10(values[0]);
 };
 
 function fnc_log(values, context) {
@@ -754,3 +754,69 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
+
+
+
+function exp_label_Soja2020_8_eval_expression(context) {
+    // format_number("tu", 0, NULL)
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return fnc_format_number([feature.properties['tu'] ,0,null], context);
+    } else {
+        return fnc_format_number([feature['tu'] ,0,null], context);
+    }
+}
+
+
+function exp_label_Milho2020_9_eval_expression(context) {
+    // format_number("tu", 0, NULL)
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return fnc_format_number([feature.properties['tu'] ,0,null], context);
+    } else {
+        return fnc_format_number([feature['tu'] ,0,null], context);
+    }
+}
+
+
+function exp_label_Minriodeferrotu_10_eval_expression(context) {
+    // format_number("tu", 0, NULL)
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return fnc_format_number([feature.properties['tu'] ,0,null], context);
+    } else {
+        return fnc_format_number([feature['tu'] ,0,null], context);
+    }
+}
+
+
+function exp_label_Minriodeferro2020tu_11_eval_expression(context) {
+    // format_number("tu", 0, NULL)
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return fnc_format_number([feature.properties['tu'] ,0,null], context);
+    } else {
+        return fnc_format_number([feature['tu'] ,0,null], context);
+    }
+}
+
+
+function exp_label_Minriodeferroorigemdestino_50_eval_expression(context) {
+    // format_number("tu", 0, NULL)
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return fnc_format_number([feature.properties['tu'] ,0,null], context);
+    } else {
+        return fnc_format_number([feature['tu'] ,0,null], context);
+    }
+}
